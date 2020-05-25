@@ -11,7 +11,7 @@ void error(char *s);
 
 /*Indicar que solo lea un fichero de entrada*/
 %option noyywrap
-/*contador de linear*/
+/*contador de lineas*/
 %option yylineno
 
 /*Identificadores*/
@@ -77,7 +77,6 @@ id  (caracter|_)(caracter|digito|_)*
 {id}                { return ID; } /*En caso de encontrar algo del identificador*/ 
 [ \t\n\r]+          {}			/*Para que espacios en blanco sean ignorados*/
 .                   {  error(yytext); } /*Para los simbolos no reconocidos error lexico*/
-
 %%
 
 void error(char *s){
