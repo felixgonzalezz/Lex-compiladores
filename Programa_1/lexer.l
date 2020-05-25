@@ -4,13 +4,13 @@
 /*y variables especiales de flex*/
 
 %{
-#include <stdlib.h>
+#include <stdio.h>
 #include "tokens.h"
 
 void error(char *s);
 %}
 
-/**/
+/*Indicar que solo lea un fichero de entrada*/
 %option noyywrap
 /*contador de linear*/
 %option yylineno
@@ -78,6 +78,7 @@ id  (caracter|_)(caracter|digito|_)*
 "."                 { return PUNTO; }
 {id}                { return ID; //En caso de encontrar algo del identificador }
 [ \t\n]+            { /*Para que espacios en blanco sean ignorados*/ }
+{id}                { return ID;}//En caso de encontrar algo del identificador
 .                   {  error(yytext); //Para los simbolos no reconocidos error lexico } 
 
 %%
