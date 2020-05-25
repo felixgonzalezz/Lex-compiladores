@@ -27,7 +27,7 @@ id  (caracter|_)(caracter|digito|_)*
 /*Se separan los símbolos terminales para que retornen token individuales.*/
 
 %%
-"estructura"        { return ESTRUCTURA; }
+"struct"        { return ESTRUCTURA; }
 "inicio"            { return INICIO; }
 "fin"               { return FIN; }
 "+"                 { return MAS; }
