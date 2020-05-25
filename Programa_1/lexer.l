@@ -1,4 +1,3 @@
-
 /* Creación Felix G. 23/05/20 */
 /* Definición de símbolos no terminales, uso de bibliotecas*/
 /*y variables especiales de flex*/
