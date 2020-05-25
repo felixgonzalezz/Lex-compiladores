@@ -11,7 +11,6 @@
 #define MENOS
 #define MUL
 #define DIV
-#define C_LLAVE
 #define MODULO
 #define A_LLAVE
 #define C_LLAVE
