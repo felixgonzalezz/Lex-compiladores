@@ -1,10 +1,8 @@
-<<<<<<< HEAD
+
 /* Creación Felix G. 23/05/20 */
 /* Definición de símbolos no terminales, uso de bibliotecas*/
 /*y variables especiales de flex*/
-=======
-/*Felix Gonzalez Zepeda 23 de mayo 2020*/
->>>>>>> 242401a0b94211e712cb916d77692e0e58a5f562
+
 %{
 #include <stdlib.h>
 #include "tokens.h"
