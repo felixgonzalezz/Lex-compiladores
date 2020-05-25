@@ -1,5 +1,5 @@
 /*Felix Gonzalez Zepeda 23 de mayo 2020*/
-//En este programa definirimeos los terminales
+//En este programa definirimeos los terminas
 #ifndef TOKENS_H
 #define TOKENS_H
 
