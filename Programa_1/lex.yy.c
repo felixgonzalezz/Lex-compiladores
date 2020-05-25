@@ -1115,18 +1115,18 @@ YY_RULE_SETUP
 case 50:
 YY_RULE_SETUP
 #line 77 "lexer.l"
-{ return ID; } //En caso de encontrar algo del identificador 
+{ return ID; } /*En caso de encontrar algo del identificador*/ 
 	YY_BREAK
 case 51:
 /* rule 51 can match eol */
 YY_RULE_SETUP
 #line 78 "lexer.l"
-/*Para que espacios en blanco sean ignorados*/
+{}			/*Para que espacios en blanco sean ignorados*/
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
 #line 79 "lexer.l"
-{  error(yytext); } //Para los simbolos no reconocidos error lexico
+{  error(yytext); } /*Para los simbolos no reconocidos error lexico*/
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
@@ -2157,7 +2157,7 @@ void error(char *s){
 	printf("Error léxico: %s, línea: %d \n", s, yylineno);
 }
 
-//Función para probar el lexer con archivo de entrada 
+/*Función para probar el lexer con archivo de entrada*/ 
 int main(int argc, char **argv){
 	FILE *f;
 	if(argc<2){
