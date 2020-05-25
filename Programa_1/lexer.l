@@ -74,9 +74,9 @@ id  (caracter|_)(caracter|digito|_)*
 "verdadero"         { return VERDADERO; }
 "falso"             { return FALSO; }
 "."                 { return PUNTO; }
-{id}                { return ID; } //En caso de encontrar algo del identificador 
-[ \t\n\r]+          			/*Para que espacios en blanco sean ignorados*/
-.                   {  error(yytext); } //Para los simbolos no reconocidos error lexico
+{id}                { return ID; } /*En caso de encontrar algo del identificador*/ 
+[ \t\n\r]+          {}			/*Para que espacios en blanco sean ignorados*/
+.                   {  error(yytext); } /*Para los simbolos no reconocidos error lexico*/
 
 %%
 
@@ -84,7 +84,7 @@ void error(char *s){
 	printf("Error léxico: %s, línea: %d \n", s, yylineno);
 }
 
-//Función para probar el lexer con archivo de entrada 
+/*Función para probar el lexer con archivo de entrada*/ 
 int main(int argc, char **argv){
 	FILE *f;
 	if(argc<2){
