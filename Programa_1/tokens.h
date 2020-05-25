@@ -26,7 +26,7 @@
 #define CAR
 #define SIN
 #define S_MAYOR
-#define S_MENOR;
+#define S_MENOR
 #define S_MAYORIG
 #define S_MENORIG
 #define DIFERENTE
@@ -55,3 +55,5 @@
 #define FALSO
 #define PUNTO
 #define ID
+
+#endif
