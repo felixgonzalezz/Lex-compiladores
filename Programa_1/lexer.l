@@ -21,7 +21,6 @@ digito [0-9]
 num  (([1-9]{digito}+)|[0])
 id  (caracter|_)(caracter|digito|_)*
 
-
 /*Expresiones regulares*/
 /* Modificación Simón R. 24/05/20*/
 /*Se separan los símbolos terminales para que retornen token individuales.*/
@@ -51,7 +50,7 @@ id  (caracter|_)(caracter|digito|_)*
 "<"                 { return S_MENOR; }
 ">="                { return S_MAYORIG; }
 "<="                { return S_MENORIG; }
-"<>"                { return DIFERENTE}
+"<>"                { return DIFERENTE; }
 "="                 { return IGUAL; }
 ","                 { return COMA; }
 "def"               { return DEF;}
@@ -68,7 +67,7 @@ id  (caracter|_)(caracter|digito|_)*
 ":="                { return ASIG; }
 "terminar"          { return TERMINAR; }
 "caso"              { return CASO; }
-"pred"              { return PRED}
+"pred"              { return PRED; }
 ":"                 { return D_PUNTOS; }
 "o"                 { return OR; }
 "y"                 { return AND; }
@@ -78,8 +77,7 @@ id  (caracter|_)(caracter|digito|_)*
 "."                 { return PUNTO; }
 {id}                { return ID; //En caso de encontrar algo del identificador }
 [ \t\n\r]+          { /*Para que espacios en blanco sean ignorados*/ }
-{id}                { return ID;}//En caso de encontrar algo del identificador
-.                   {  error(yytext); //Para los simbolos no reconocidos error lexico } 
+.                   {  error(yytext); //Para los simbolos no reconocidos error lexico }
 
 %%
 
