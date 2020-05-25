@@ -64,7 +64,7 @@ id  (caracter|_)(caracter|digito|_)*
 "segun"             { return SEGUN;}
 "escribir"          { return ESCRIBIR;}
 "leer"              { return LEER; }
-"devolver"          { return DEVOLVER; }
+"return"          { return DEVOLVER; }
 ":="                { return ASIG; }
 "terminar"          { return TERMINAR; }
 "caso"              { return CASO; }
