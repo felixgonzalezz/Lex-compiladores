@@ -17,6 +17,10 @@ void error(char *s);
 /*Identificadores*/
 caracter [a-zA-Z_]
 digito [0-9]
+digitos {digito}+
+exp (e|E)(+|-)?{digitos}
+doble ((\.{digitos}|{digitos}\.{digitos}){exp}|{digitos}{exp})
+flotante ((\.{digitos}|{digitos}\.{digitos}){exp}|{digitos}{exp})[fF]
 num  (([1-9]{digito}+)|[0])
 id  (caracter|_)(caracter|digito|_)*
 
@@ -54,6 +58,7 @@ id  (caracter|_)(caracter|digito|_)*
 ","                 { return COMA; }
 "def"               { return DEF;}
 {num}               { return NUM; }
+
 "si"                { return SI; }
 "entonces"          { return ENTONCES; }
 "sino"              { return SINO; }
