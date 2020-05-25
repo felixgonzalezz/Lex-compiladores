@@ -76,7 +76,7 @@ id  (caracter|_)(caracter | digito | _)*
 "verdadero"         { return VERDADERO; }
 "falso"             { return FALSO; }
 "."                 { return PUNTO; }
-{id}                { return ID;//En caso de encontrar algo del identificador }
+{id}                { return ID; }//En caso de encontrar algo del identificador
 [ \t\n\r]            //Para que espacios en blanco sean ignorados
 .                   {  error(yytext); //Para los simbolos no reconocidos error lexico } 
 
