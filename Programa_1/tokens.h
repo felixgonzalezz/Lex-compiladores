@@ -19,40 +19,40 @@
 #define A_CORCHETE 13
 #define C_CORCHETE 14
 #define PYC 15
-#define ENT
-#define REAL
-#define DREAL
-#define CAR
-#define SIN
-#define S_MAYOR
-#define S_MENOR
-#define S_MAYORIG
-#define S_MENORIG
-#define DIFERENTE
-#define IGUAL
-#define COMA
-#define DEF
-#define NUM
-#define SI
-#define ENTONCES
-#define SINO
-#define MIENTRAS
-#define HACER
-#define SEGUN
-#define ESCRIBIR
-#define LEER
-#define DEVOLVER
-#define ASIG
-#define TERMINAR
-#define CASO
-#define PRED
-#define D_PUNTOS
-#define OR
-#define AND
-#define NOT
-#define VERDADERO
-#define FALSO
-#define PUNTO
-#define ID
+#define ENT 16
+#define REAL 17
+#define DREAL 18
+#define CAR 19
+#define SIN 20
+#define S_MAYOR 21
+#define S_MENOR 22
+#define S_MAYORIG 23
+#define S_MENORIG 24
+#define DIFERENTE 25
+#define IGUAL 26
+#define COMA 27
+#define DEF 28
+#define NUM 29
+#define SI 30
+#define ENTONCES 31
+#define SINO 32
+#define MIENTRAS 33
+#define HACER 34
+#define SEGUN 35
+#define ESCRIBIR 36
+#define LEER 37
+#define DEVOLVER 38
+#define ASIG 39
+#define TERMINAR 40
+#define CASO 41
+#define PRED 42
+#define D_PUNTOS 43
+#define OR 44
+#define AND 45
+#define NOT 46
+#define VERDADERO 47
+#define FALSO 48
+#define PUNTO 49
+#define ID 50
 
 #endif
