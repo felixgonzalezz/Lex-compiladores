@@ -4,24 +4,6 @@
 
 // Modif. Cristian Valeriano 24/05/2020
 //Definimos las cosntantes para cada simbolo terminal
-<<<<<<< HEAD
-#define ESTRUCTURA 100
-#define INICIO 200
-#define FIN
-#define MAS
-#define MENOS
-#define MUL
-#define DIV
-#define C_LLAVE
-#define MODULO
-#define A_LLAVE
-#define C_LLAVE
-#define A_PAR
-#define C_PAR
-#define A_CORCHETE
-#define C_CORCHETE
-#define PYC
-=======
 #define ESTRUCTURA 1
 #define INICIO 2
 #define FIN 3
@@ -37,7 +19,6 @@
 #define A_CORCHETE 13
 #define C_CORCHETE 14
 #define PYC 15
->>>>>>> def98638fab09e86ba6af80dc6aaf922a38366a6
 #define ENT
 #define REAL
 #define DREAL
