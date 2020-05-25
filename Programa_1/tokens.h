@@ -4,8 +4,8 @@
 
 // Modif. Cristian Valeriano 24/05/2020
 //Definimos las cosntantes para cada simbolo terminal
-#define ESTRUCTURA
-#define INICIO
+#define ESTRUCTURA 100
+#define INICIO 200
 #define FIN
 #define MAS
 #define MENOS
@@ -26,7 +26,7 @@
 #define CAR
 #define SIN
 #define S_MAYOR
-#define S_MENOR;
+#define S_MENOR
 #define S_MAYORIG
 #define S_MENORIG
 #define DIFERENTE
