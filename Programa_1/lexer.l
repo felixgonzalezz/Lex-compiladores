@@ -19,7 +19,7 @@ caracter [a-zA-Z_]
 digito [0-9]
 digitos {digito}+
 exp (e|E)(+|-)?{digitos}
-doble ((\.{digitos}|{digitos}\.{digitos}){exp}|{digitos}{exp})
+doble ((\.{digitos}|{digitos}\.{digitos}){exp}|{digitos}{exp})(lf|lF)
 flotante ((\.{digitos}|{digitos}\.{digitos}){exp}|{digitos}{exp})[fF]
 num  (([1-9]{digito}+)|[0])
 id  (caracter|_)(caracter|digito|_)*
