@@ -19,7 +19,7 @@ void error(char *s);
 caracter [a-zA-Z_]
 digito [0-9]
 num  (([1-9]{digito}+)|[0])
-id  (caracter|_)(caracter | digito | _)*
+id  ((caracter|_)(caracter | digito | _)*
 
 
 /*Expresiones regulares*/
