@@ -4,7 +4,7 @@
 /*y variables especiales de flex*/
 
 %{
-#include <stdlib.h>
+#include <stdio.h>
 #include "tokens.h"
 
 void error(char *s);
