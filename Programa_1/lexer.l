@@ -79,6 +79,7 @@ id  (caracter|_)(caracter|digito|_)*
 {id}                { return ID; //En caso de encontrar algo del identificador }
 [ \t\n]+            { /*Para que espacios en blanco sean ignorados*/ }
 {id}                { return ID;}//En caso de encontrar algo del identificador
+[ \t\n\r]           //Para que espacios en blanco sean ignorados
 .                   {  error(yytext); //Para los simbolos no reconocidos error lexico } 
 
 %%
