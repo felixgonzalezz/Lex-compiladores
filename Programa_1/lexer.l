@@ -10,7 +10,7 @@
 void error(char *s);
 %}
 
-/**/
+/*Indicar que solo lea un fichero de entrada*/
 %option noyywrap
 /*contador de linear*/
 %option yylineno
@@ -19,7 +19,7 @@ void error(char *s);
 caracter [a-zA-Z_]
 digito [0-9]
 num  (([1-9]{digito}+)|[0])
-id  ((caracter|_)(caracter | digito | _)*
+id  (caracter|_)(caracter | digito | _)*
 
 
 /*Expresiones regulares*/
@@ -77,7 +77,7 @@ id  ((caracter|_)(caracter | digito | _)*
 "falso"             { return FALSO; }
 "."                 { return PUNTO; }
 {id}                { return ID;}//En caso de encontrar algo del identificador
-[ \t\n\r]           //Para que espacios en blanco sean ignorados
+
 .                   {  error(yytext); //Para los simbolos no reconocidos error lexico } 
 
 %%
