@@ -27,7 +27,7 @@ id  (caracter|_)(caracter|digito|_)*
 /*Se separan los símbolos terminales para que retornen token individuales.*/
 
 %%
-"struct"        { return ESTRUCTURA; }
+"estructura"        { return ESTRUCTURA; }
 "inicio"            { return INICIO; }
 "fin"               { return FIN; }
 "+"                 { return MAS; }
@@ -64,7 +64,7 @@ id  (caracter|_)(caracter|digito|_)*
 "segun"             { return SEGUN;}
 "escribir"          { return ESCRIBIR;}
 "leer"              { return LEER; }
-"return"          { return DEVOLVER; }
+"devolver"          { return DEVOLVER; }
 ":="                { return ASIG; }
 "terminar"          { return TERMINAR; }
 "caso"              { return CASO; }
