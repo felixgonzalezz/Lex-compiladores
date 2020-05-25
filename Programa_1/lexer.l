@@ -29,7 +29,7 @@ id  (caracter|_)(caracter|digito|_)*
 "inicio"            { return INICIO; }
 "fin"               { return FIN; }
 "+"                 { return MAS; }
-"-"                 { return MENOS;}
+"-"                 { return MENOS; } 
 "*"                 { return MUL; }
 "/"                 { return DIV; }
 "%"                 { return MODULO; }
@@ -41,9 +41,9 @@ id  (caracter|_)(caracter|digito|_)*
 "]"                 { return C_CORCHETE; }
 ";"                 { return PYC; }
 "ent"               { return ENT; }
-"real"              { return REAL;}
-"dreal"             { return DREAL;}
-"car"               { return CAR;}
+"real"              { return REAL; }
+"dreal"             { return DREAL; }
+"car"               { return CAR; }
 "sin"               { return SIN; }
 ">"                 { return S_MAYOR; } 
 "<"                 { return S_MENOR; }
@@ -59,8 +59,8 @@ id  (caracter|_)(caracter|digito|_)*
 "sino"              { return SINO; }
 "mientras"          { return MIENTRAS; }
 "hacer"             { return HACER; }
-"segun"             { return SEGUN;}
-"escribir"          { return ESCRIBIR;}
+"segun"             { return SEGUN; }
+"escribir"          { return ESCRIBIR; }
 "leer"              { return LEER; }
 "devolver"          { return DEVOLVER; }
 ":="                { return ASIG; }
@@ -74,9 +74,9 @@ id  (caracter|_)(caracter|digito|_)*
 "verdadero"         { return VERDADERO; }
 "falso"             { return FALSO; }
 "."                 { return PUNTO; }
-{id}                { return ID; //En caso de encontrar algo del identificador }
-[ \t\n\r]+          { /*Para que espacios en blanco sean ignorados*/ }
-.                   {  error(yytext); //Para los simbolos no reconocidos error lexico }
+{id}                { return ID; } //En caso de encontrar algo del identificador 
+[ \t\n\r]+          			/*Para que espacios en blanco sean ignorados*/
+.                   {  error(yytext); } //Para los simbolos no reconocidos error lexico
 
 %%
 
