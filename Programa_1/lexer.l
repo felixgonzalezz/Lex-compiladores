@@ -68,7 +68,7 @@ id  (caracter|_)(caracter|digito|_)*
 ":="                { return ASIG; }
 "terminar"          { return TERMINAR; }
 "caso"              { return CASO; }
-"pred"              { return PRED}
+"pred"              { return PRED; }
 ":"                 { return D_PUNTOS; }
 "o"                 { return OR; }
 "y"                 { return AND; }
