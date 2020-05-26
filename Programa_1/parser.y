@@ -12,8 +12,6 @@ void yyerror(char *s);
 %token VERDADERO
 %token FALSO
 %token ID
-%token FLOTANTE
-%token DOBLE
 %token CARACTER
 %token CADENA
 %token ENT
@@ -71,8 +69,8 @@ void yyerror(char *s);
 
 programa : declaraciones funciones ;
 
-declaraciones : tipo lista_var PYC declaraciones {printf("D-> T L ; D");}
-        | tipo_registro lista_var PYC declaraciones | {printf("D->€");};
+declaraciones : tipo lista_var PYC declaraciones {printf("D-> T L ; D\n");}
+        | tipo_registro lista_var PYC declaraciones | {printf("D->€\n");};
 
 tipo_registro : ESTRUCTURA INICIO  declaraciones FIN ;
 
@@ -82,8 +80,8 @@ base : ENT | REAL | DREAL | CAR | SIN ;
 
 tipo_arreglo : A_CORCHETE NUM C_CORCHETE tipo_arreglo | ;
 
-lista_var : lista_var COMA ID {printf("L-> L, id");}
-        | ID {printf("L->id");} ;
+lista_var : lista_var COMA ID {printf("L-> L, id\n");}
+        | ID {printf("L->id\n");} ;
 
 funciones : DEF tipo ID A_PAR argumentos C_PAR INICIO declaraciones sentencias FIN funciones | ;
 

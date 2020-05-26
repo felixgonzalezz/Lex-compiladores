@@ -1,4 +1,8 @@
 ent x;
-real y;
+real ya;
 dreal de;
 car e;
+
+def sin _test(sin) inicio 
+    terminar;
+    fin

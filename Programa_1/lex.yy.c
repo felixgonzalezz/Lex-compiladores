@@ -1055,12 +1055,12 @@ YY_RULE_SETUP
 case 30:
 YY_RULE_SETUP
 #line 64 "lexer.l"
-{ return DOBLE; }
+{ return NUM; }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
 #line 65 "lexer.l"
-{ return FLOTANTE; }
+{ return NUM; }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP

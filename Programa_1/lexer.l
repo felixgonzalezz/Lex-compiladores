@@ -61,8 +61,8 @@ cadena \"[^"]*\"
 ","                 { return COMA; }
 "def"               { return DEF;}
 "."                 { return PUNTO; }
-{doble}				{ return DOBLE; }
-{flotante}			{ return FLOTANTE; }
+{doble}				{ return NUM; }
+{flotante}			{ return NUM; }
 {num}               { return NUM; }
 "si"                { return SI; }
 "entonces"          { return ENTONCES; }
