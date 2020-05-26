@@ -61,8 +61,8 @@ cadena (\“~(\”)*\”)|(\‘~(\’)*\’)
 "def"               { return DEF;}
 "."                 { return PUNTO; }
 {doble}				{ return DOBLE; }
-{flotante}			{ yylval.val = atof(yytext); return FLOTANTE; }
-{num}               { yylval.val = atoi(yytext); return NUM; }
+{flotante}			{ return FLOTANTE; }
+{num}               { return NUM; }
 "si"                { return SI; }
 "entonces"          { return ENTONCES; }
 "sino"              { return SINO; }
@@ -86,5 +86,5 @@ cadena (\“~(\”)*\”)|(\‘~(\’)*\’)
 {cadena}			{ return CADENA; }
 {id}                { return ID; } /*En caso de encontrar algo del identificador*/ 
 [ \t\n\r]+          {}			/*Para que espacios en blanco sean ignorados*/
-.                   {  {printf("Error Lexico: %s\n", yytext);} } /*Para los simbolos no reconocidos error lexico*/
+.                   {  {printf("Error Lexico: %s\n En línea %d", yytext, yylineno);} } /*Para los simbolos no reconocidos error lexico*/
 %%

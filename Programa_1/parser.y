@@ -9,7 +9,6 @@ void yyerror(char *s);
 %token COMA
 %token VERDADERO
 %token FALSO
-%token PUNTO
 %token ID
 %token FLOTANTE
 %token DOBLE
@@ -61,7 +60,7 @@ void yyerror(char *s);
 /* Unarios */
 %right NOT
 /* Agrupación */
-%nonassoc A_LLAVE C_LLAVE A_PAR C_PAR A_CORCHETE C_CORCHETE 
+%nonassoc A_LLAVE C_LLAVE A_PAR C_PAR A_CORCHETE C_CORCHETE PUNTO
 
 
 %%
@@ -78,7 +77,7 @@ tipo : base tipo_arreglo ;
 
 base : ENT | REAL | DREAL | CAR | SIN ;
 
-tipo_arreglo : A_PAR NUM C_PAR tipo_arreglo | ;
+tipo_arreglo : A_CORCHETE NUM C_CORCHETE tipo_arreglo | ;
 
 lista_var : lista_var COMA ID
         | ID ;
@@ -94,7 +93,7 @@ arg : tipo_arg ID ;
 
 tipo_arg : base param_arr ;
 
-param_arr : A_PAR C_PAR param_arr | ;
+param_arr : A_CORCHETE C_CORCHETE param_arr | ;
 
 sentencias : sentencias sentencia | sentencia ;
 
@@ -150,8 +149,8 @@ variable_comp : dato_est_sim
 
 dato_est_sim : dato_est_sim PUNTO ID | ;
 
-arreglo : A_PAR expresion C_PAR
-        | arreglo A_PAR expresion C_PAR ;
+arreglo : A_CORCHETE expresion C_CORCHETE
+        | arreglo A_CORCHETE expresion C_CORCHETE ;
 
 parametros : lista_param | ;
 

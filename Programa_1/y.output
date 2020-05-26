@@ -95,8 +95,8 @@
   71  dato_est_sim : dato_est_sim PUNTO ID
   72               |
 
-  73  arreglo : A_PAR expresion C_PAR
-  74          | arreglo A_PAR expresion C_PAR
+  73  arreglo : A_CORCHETE expresion C_CORCHETE
+  74          | arreglo A_CORCHETE expresion C_CORCHETE
 
   75  parametros : lista_param
   76             |
@@ -594,11 +594,12 @@ state 50
 	dato_est_sim : .  (72)
 
 	A_PAR  shift 63
+	A_CORCHETE  shift 64
 	COMA  reduce 72
-	PUNTO  reduce 72
 	PYC  reduce 72
 	ENTONCES  reduce 72
 	HACER  reduce 72
+	ASIG  reduce 72
 	OR  reduce 72
 	AND  reduce 72
 	DIFERENTE  reduce 72
@@ -612,12 +613,13 @@ state 50
 	MUL  reduce 72
 	DIV  reduce 72
 	MODULO  reduce 72
-	ASIG  reduce 72
 	C_PAR  reduce 72
+	C_CORCHETE  reduce 72
+	PUNTO  reduce 72
 
-	variable_comp  goto 64
-	dato_est_sim  goto 65
-	arreglo  goto 66
+	variable_comp  goto 65
+	dato_est_sim  goto 66
+	arreglo  goto 67
 
 
 state 51
@@ -635,7 +637,7 @@ state 51
 	TERMINAR  shift 59
 	.  error
 
-	sentencias  goto 67
+	sentencias  goto 68
 	sentencia  goto 61
 	variable  goto 62
 
@@ -644,39 +646,39 @@ state 52
 	sentencia : SI . e_bool ENTONCES sentencia FIN  (28)
 	sentencia : SI . e_bool ENTONCES sentencia SINO sentencia FIN  (29)
 
-	VERDADERO  shift 68
-	FALSO  shift 69
+	VERDADERO  shift 69
+	FALSO  shift 70
 	ID  shift 50
-	CARACTER  shift 70
-	CADENA  shift 71
-	NUM  shift 72
-	NOT  shift 73
-	A_PAR  shift 74
+	CARACTER  shift 71
+	CADENA  shift 72
+	NUM  shift 73
+	NOT  shift 74
+	A_PAR  shift 75
 	.  error
 
-	e_bool  goto 75
-	variable  goto 76
-	expresion  goto 77
-	relacional  goto 78
+	e_bool  goto 76
+	variable  goto 77
+	expresion  goto 78
+	relacional  goto 79
 
 
 state 53
 	sentencia : MIENTRAS . e_bool HACER sentencia FIN  (30)
 
-	VERDADERO  shift 68
-	FALSO  shift 69
+	VERDADERO  shift 69
+	FALSO  shift 70
 	ID  shift 50
-	CARACTER  shift 70
-	CADENA  shift 71
-	NUM  shift 72
-	NOT  shift 73
-	A_PAR  shift 74
+	CARACTER  shift 71
+	CADENA  shift 72
+	NUM  shift 73
+	NOT  shift 74
+	A_PAR  shift 75
 	.  error
 
-	e_bool  goto 79
-	variable  goto 76
-	expresion  goto 77
-	relacional  goto 78
+	e_bool  goto 80
+	variable  goto 77
+	expresion  goto 78
+	relacional  goto 79
 
 
 state 54
@@ -694,14 +696,14 @@ state 54
 	TERMINAR  shift 59
 	.  error
 
-	sentencia  goto 80
+	sentencia  goto 81
 	variable  goto 62
 
 
 state 55
 	sentencia : SEGUN . A_PAR variable C_PAR HACER casos predeterminado FIN  (32)
 
-	A_PAR  shift 81
+	A_PAR  shift 82
 	.  error
 
 
@@ -709,14 +711,14 @@ state 56
 	sentencia : ESCRIBIR . expresion PYC  (34)
 
 	ID  shift 50
-	CARACTER  shift 70
-	CADENA  shift 71
-	NUM  shift 72
-	A_PAR  shift 74
+	CARACTER  shift 71
+	CADENA  shift 72
+	NUM  shift 73
+	A_PAR  shift 75
 	.  error
 
-	variable  goto 76
-	expresion  goto 82
+	variable  goto 77
+	expresion  goto 83
 
 
 state 57
@@ -725,7 +727,7 @@ state 57
 	ID  shift 50
 	.  error
 
-	variable  goto 83
+	variable  goto 84
 
 
 state 58
@@ -733,21 +735,21 @@ state 58
 	sentencia : DEVOLVER . expresion PYC  (37)
 
 	ID  shift 50
-	CARACTER  shift 70
-	CADENA  shift 71
-	PYC  shift 84
-	NUM  shift 72
-	A_PAR  shift 74
+	CARACTER  shift 71
+	CADENA  shift 72
+	PYC  shift 85
+	NUM  shift 73
+	A_PAR  shift 75
 	.  error
 
-	variable  goto 76
-	expresion  goto 85
+	variable  goto 77
+	expresion  goto 86
 
 
 state 59
 	sentencia : TERMINAR . PYC  (38)
 
-	PYC  shift 86
+	PYC  shift 87
 	.  error
 
 
@@ -757,7 +759,7 @@ state 60
 
 	ID  shift 50
 	INICIO  shift 51
-	FIN  shift 87
+	FIN  shift 88
 	SI  shift 52
 	MIENTRAS  shift 53
 	HACER  shift 54
@@ -768,7 +770,7 @@ state 60
 	TERMINAR  shift 59
 	.  error
 
-	sentencia  goto 88
+	sentencia  goto 89
 	variable  goto 62
 
 
@@ -781,43 +783,57 @@ state 61
 state 62
 	sentencia : variable . ASIG expresion PYC  (33)
 
-	ASIG  shift 89
+	ASIG  shift 90
 	.  error
 
 
 state 63
 	variable_comp : A_PAR . parametros C_PAR  (70)
-	arreglo : A_PAR . expresion C_PAR  (73)
 	parametros : .  (76)
 
 	ID  shift 50
-	CARACTER  shift 70
-	CADENA  shift 71
-	NUM  shift 72
-	A_PAR  shift 74
+	CARACTER  shift 71
+	CADENA  shift 72
+	NUM  shift 73
+	A_PAR  shift 75
 	C_PAR  reduce 76
 
-	variable  goto 76
-	expresion  goto 90
-	parametros  goto 91
-	lista_param  goto 92
+	variable  goto 77
+	expresion  goto 91
+	parametros  goto 92
+	lista_param  goto 93
 
 
 state 64
+	arreglo : A_CORCHETE . expresion C_CORCHETE  (73)
+
+	ID  shift 50
+	CARACTER  shift 71
+	CADENA  shift 72
+	NUM  shift 73
+	A_PAR  shift 75
+	.  error
+
+	variable  goto 77
+	expresion  goto 94
+
+
+state 65
 	variable : ID variable_comp .  (67)
 
 	.  reduce 67
 
 
-state 65
+state 66
 	variable_comp : dato_est_sim .  (68)
 	dato_est_sim : dato_est_sim . PUNTO ID  (71)
 
-	PUNTO  shift 93
+	PUNTO  shift 95
 	COMA  reduce 68
 	PYC  reduce 68
 	ENTONCES  reduce 68
 	HACER  reduce 68
+	ASIG  reduce 68
 	OR  reduce 68
 	AND  reduce 68
 	DIFERENTE  reduce 68
@@ -831,19 +847,20 @@ state 65
 	MUL  reduce 68
 	DIV  reduce 68
 	MODULO  reduce 68
-	ASIG  reduce 68
 	C_PAR  reduce 68
+	C_CORCHETE  reduce 68
 
 
-state 66
+state 67
 	variable_comp : arreglo .  (69)
-	arreglo : arreglo . A_PAR expresion C_PAR  (74)
+	arreglo : arreglo . A_CORCHETE expresion C_CORCHETE  (74)
 
-	A_PAR  shift 94
+	A_CORCHETE  shift 96
 	COMA  reduce 69
 	PYC  reduce 69
 	ENTONCES  reduce 69
 	HACER  reduce 69
+	ASIG  reduce 69
 	OR  reduce 69
 	AND  reduce 69
 	DIFERENTE  reduce 69
@@ -857,17 +874,17 @@ state 66
 	MUL  reduce 69
 	DIV  reduce 69
 	MODULO  reduce 69
-	ASIG  reduce 69
 	C_PAR  reduce 69
+	C_CORCHETE  reduce 69
 
 
-state 67
+state 68
 	sentencias : sentencias . sentencia  (26)
 	sentencia : INICIO sentencias . FIN  (39)
 
 	ID  shift 50
 	INICIO  shift 51
-	FIN  shift 95
+	FIN  shift 97
 	SI  shift 52
 	MIENTRAS  shift 53
 	HACER  shift 54
@@ -878,92 +895,92 @@ state 67
 	TERMINAR  shift 59
 	.  error
 
-	sentencia  goto 88
+	sentencia  goto 89
 	variable  goto 62
 
 
-state 68
+state 69
 	e_bool : VERDADERO .  (48)
 
 	.  reduce 48
 
 
-state 69
+state 70
 	e_bool : FALSO .  (49)
 
 	.  reduce 49
 
 
-state 70
+state 71
 	expresion : CARACTER .  (66)
 
 	.  reduce 66
 
 
-state 71
+state 72
 	expresion : CADENA .  (65)
 
 	.  reduce 65
 
 
-state 72
+state 73
 	expresion : NUM .  (64)
 
 	.  reduce 64
 
 
-state 73
+state 74
 	e_bool : NOT . e_bool  (46)
 
-	VERDADERO  shift 68
-	FALSO  shift 69
+	VERDADERO  shift 69
+	FALSO  shift 70
 	ID  shift 50
-	CARACTER  shift 70
-	CADENA  shift 71
-	NUM  shift 72
-	NOT  shift 73
-	A_PAR  shift 74
+	CARACTER  shift 71
+	CADENA  shift 72
+	NUM  shift 73
+	NOT  shift 74
+	A_PAR  shift 75
 	.  error
 
-	e_bool  goto 96
-	variable  goto 76
-	expresion  goto 77
-	relacional  goto 78
-
-
-state 74
-	expresion : A_PAR . expresion C_PAR  (62)
-
-	ID  shift 50
-	CARACTER  shift 70
-	CADENA  shift 71
-	NUM  shift 72
-	A_PAR  shift 74
-	.  error
-
-	variable  goto 76
-	expresion  goto 97
+	e_bool  goto 98
+	variable  goto 77
+	expresion  goto 78
+	relacional  goto 79
 
 
 state 75
+	expresion : A_PAR . expresion C_PAR  (62)
+
+	ID  shift 50
+	CARACTER  shift 71
+	CADENA  shift 72
+	NUM  shift 73
+	A_PAR  shift 75
+	.  error
+
+	variable  goto 77
+	expresion  goto 99
+
+
+state 76
 	sentencia : SI e_bool . ENTONCES sentencia FIN  (28)
 	sentencia : SI e_bool . ENTONCES sentencia SINO sentencia FIN  (29)
 	e_bool : e_bool . OR e_bool  (44)
 	e_bool : e_bool . AND e_bool  (45)
 
-	ENTONCES  shift 98
-	OR  shift 99
-	AND  shift 100
+	ENTONCES  shift 100
+	OR  shift 101
+	AND  shift 102
 	.  error
 
 
-state 76
+state 77
 	expresion : variable .  (63)
 
 	.  reduce 63
 
 
-state 77
+state 78
 	relacional : expresion .  (56)
 	expresion : expresion . MAS expresion  (57)
 	expresion : expresion . MENOS expresion  (58)
@@ -971,11 +988,11 @@ state 77
 	expresion : expresion . DIV expresion  (60)
 	expresion : expresion . MODULO expresion  (61)
 
-	MAS  shift 101
-	MENOS  shift 102
-	MUL  shift 103
-	DIV  shift 104
-	MODULO  shift 105
+	MAS  shift 103
+	MENOS  shift 104
+	MUL  shift 105
+	DIV  shift 106
+	MODULO  shift 107
 	PYC  reduce 56
 	ENTONCES  reduce 56
 	HACER  reduce 56
@@ -989,7 +1006,7 @@ state 77
 	S_MENORIG  reduce 56
 
 
-state 78
+state 79
 	e_bool : relacional .  (47)
 	relacional : relacional . S_MAYOR relacional  (50)
 	relacional : relacional . S_MENOR relacional  (51)
@@ -998,12 +1015,12 @@ state 78
 	relacional : relacional . DIFERENTE relacional  (54)
 	relacional : relacional . IGUAL relacional  (55)
 
-	DIFERENTE  shift 106
-	IGUAL  shift 107
-	S_MAYOR  shift 108
-	S_MAYORIG  shift 109
-	S_MENOR  shift 110
-	S_MENORIG  shift 111
+	DIFERENTE  shift 108
+	IGUAL  shift 109
+	S_MAYOR  shift 110
+	S_MAYORIG  shift 111
+	S_MENOR  shift 112
+	S_MENORIG  shift 113
 	PYC  reduce 47
 	ENTONCES  reduce 47
 	HACER  reduce 47
@@ -1011,34 +1028,34 @@ state 78
 	AND  reduce 47
 
 
-state 79
+state 80
 	sentencia : MIENTRAS e_bool . HACER sentencia FIN  (30)
 	e_bool : e_bool . OR e_bool  (44)
 	e_bool : e_bool . AND e_bool  (45)
 
-	HACER  shift 112
-	OR  shift 99
-	AND  shift 100
-	.  error
-
-
-state 80
-	sentencia : HACER sentencia . MIENTRAS e_bool PYC  (31)
-
-	MIENTRAS  shift 113
+	HACER  shift 114
+	OR  shift 101
+	AND  shift 102
 	.  error
 
 
 state 81
+	sentencia : HACER sentencia . MIENTRAS e_bool PYC  (31)
+
+	MIENTRAS  shift 115
+	.  error
+
+
+state 82
 	sentencia : SEGUN A_PAR . variable C_PAR HACER casos predeterminado FIN  (32)
 
 	ID  shift 50
 	.  error
 
-	variable  goto 114
+	variable  goto 116
 
 
-state 82
+state 83
 	sentencia : ESCRIBIR expresion . PYC  (34)
 	expresion : expresion . MAS expresion  (57)
 	expresion : expresion . MENOS expresion  (58)
@@ -1046,29 +1063,29 @@ state 82
 	expresion : expresion . DIV expresion  (60)
 	expresion : expresion . MODULO expresion  (61)
 
-	PYC  shift 115
-	MAS  shift 101
-	MENOS  shift 102
-	MUL  shift 103
-	DIV  shift 104
-	MODULO  shift 105
-	.  error
-
-
-state 83
-	sentencia : LEER variable . PYC  (35)
-
-	PYC  shift 116
+	PYC  shift 117
+	MAS  shift 103
+	MENOS  shift 104
+	MUL  shift 105
+	DIV  shift 106
+	MODULO  shift 107
 	.  error
 
 
 state 84
+	sentencia : LEER variable . PYC  (35)
+
+	PYC  shift 118
+	.  error
+
+
+state 85
 	sentencia : DEVOLVER PYC .  (36)
 
 	.  reduce 36
 
 
-state 85
+state 86
 	sentencia : DEVOLVER expresion . PYC  (37)
 	expresion : expresion . MAS expresion  (57)
 	expresion : expresion . MENOS expresion  (58)
@@ -1076,113 +1093,128 @@ state 85
 	expresion : expresion . DIV expresion  (60)
 	expresion : expresion . MODULO expresion  (61)
 
-	PYC  shift 117
-	MAS  shift 101
-	MENOS  shift 102
-	MUL  shift 103
-	DIV  shift 104
-	MODULO  shift 105
+	PYC  shift 119
+	MAS  shift 103
+	MENOS  shift 104
+	MUL  shift 105
+	DIV  shift 106
+	MODULO  shift 107
 	.  error
 
 
-state 86
+state 87
 	sentencia : TERMINAR PYC .  (38)
 
 	.  reduce 38
 
 
-state 87
+state 88
 	funciones : DEF tipo ID A_PAR argumentos C_PAR INICIO declaraciones sentencias FIN . funciones  (16)
 	funciones : .  (17)
 
 	DEF  shift 13
 	$end  reduce 17
 
-	funciones  goto 118
+	funciones  goto 120
 
 
-state 88
+state 89
 	sentencias : sentencias sentencia .  (26)
 
 	.  reduce 26
 
 
-state 89
+state 90
 	sentencia : variable ASIG . expresion PYC  (33)
 
 	ID  shift 50
-	CARACTER  shift 70
-	CADENA  shift 71
-	NUM  shift 72
-	A_PAR  shift 74
+	CARACTER  shift 71
+	CADENA  shift 72
+	NUM  shift 73
+	A_PAR  shift 75
 	.  error
 
-	variable  goto 76
-	expresion  goto 119
+	variable  goto 77
+	expresion  goto 121
 
 
-90: shift/reduce conflict (shift 120, reduce 78) on C_PAR
-state 90
+state 91
 	expresion : expresion . MAS expresion  (57)
 	expresion : expresion . MENOS expresion  (58)
 	expresion : expresion . MUL expresion  (59)
 	expresion : expresion . DIV expresion  (60)
 	expresion : expresion . MODULO expresion  (61)
-	arreglo : A_PAR expresion . C_PAR  (73)
 	lista_param : expresion .  (78)
 
-	MAS  shift 101
-	MENOS  shift 102
-	MUL  shift 103
-	DIV  shift 104
-	MODULO  shift 105
-	C_PAR  shift 120
+	MAS  shift 103
+	MENOS  shift 104
+	MUL  shift 105
+	DIV  shift 106
+	MODULO  shift 107
 	COMA  reduce 78
-
-
-state 91
-	variable_comp : A_PAR parametros . C_PAR  (70)
-
-	C_PAR  shift 121
-	.  error
+	C_PAR  reduce 78
 
 
 state 92
-	parametros : lista_param .  (75)
-	lista_param : lista_param . COMA expresion  (77)
+	variable_comp : A_PAR parametros . C_PAR  (70)
 
-	COMA  shift 122
-	C_PAR  reduce 75
+	C_PAR  shift 122
+	.  error
 
 
 state 93
-	dato_est_sim : dato_est_sim PUNTO . ID  (71)
+	parametros : lista_param .  (75)
+	lista_param : lista_param . COMA expresion  (77)
 
-	ID  shift 123
-	.  error
+	COMA  shift 123
+	C_PAR  reduce 75
 
 
 state 94
-	arreglo : arreglo A_PAR . expresion C_PAR  (74)
+	expresion : expresion . MAS expresion  (57)
+	expresion : expresion . MENOS expresion  (58)
+	expresion : expresion . MUL expresion  (59)
+	expresion : expresion . DIV expresion  (60)
+	expresion : expresion . MODULO expresion  (61)
+	arreglo : A_CORCHETE expresion . C_CORCHETE  (73)
 
-	ID  shift 50
-	CARACTER  shift 70
-	CADENA  shift 71
-	NUM  shift 72
-	A_PAR  shift 74
+	MAS  shift 103
+	MENOS  shift 104
+	MUL  shift 105
+	DIV  shift 106
+	MODULO  shift 107
+	C_CORCHETE  shift 124
 	.  error
-
-	variable  goto 76
-	expresion  goto 124
 
 
 state 95
+	dato_est_sim : dato_est_sim PUNTO . ID  (71)
+
+	ID  shift 125
+	.  error
+
+
+state 96
+	arreglo : arreglo A_CORCHETE . expresion C_CORCHETE  (74)
+
+	ID  shift 50
+	CARACTER  shift 71
+	CADENA  shift 72
+	NUM  shift 73
+	A_PAR  shift 75
+	.  error
+
+	variable  goto 77
+	expresion  goto 126
+
+
+state 97
 	sentencia : INICIO sentencias FIN .  (39)
 
 	.  reduce 39
 
 
-state 96
+state 98
 	e_bool : e_bool . OR e_bool  (44)
 	e_bool : e_bool . AND e_bool  (45)
 	e_bool : NOT e_bool .  (46)
@@ -1190,7 +1222,7 @@ state 96
 	.  reduce 46
 
 
-state 97
+state 99
 	expresion : expresion . MAS expresion  (57)
 	expresion : expresion . MENOS expresion  (58)
 	expresion : expresion . MUL expresion  (59)
@@ -1198,16 +1230,16 @@ state 97
 	expresion : expresion . MODULO expresion  (61)
 	expresion : A_PAR expresion . C_PAR  (62)
 
-	MAS  shift 101
-	MENOS  shift 102
-	MUL  shift 103
-	DIV  shift 104
-	MODULO  shift 105
-	C_PAR  shift 125
+	MAS  shift 103
+	MENOS  shift 104
+	MUL  shift 105
+	DIV  shift 106
+	MODULO  shift 107
+	C_PAR  shift 127
 	.  error
 
 
-state 98
+state 100
 	sentencia : SI e_bool ENTONCES . sentencia FIN  (28)
 	sentencia : SI e_bool ENTONCES . sentencia SINO sentencia FIN  (29)
 
@@ -1223,209 +1255,209 @@ state 98
 	TERMINAR  shift 59
 	.  error
 
-	sentencia  goto 126
+	sentencia  goto 128
 	variable  goto 62
 
 
-state 99
+state 101
 	e_bool : e_bool OR . e_bool  (44)
 
-	VERDADERO  shift 68
-	FALSO  shift 69
+	VERDADERO  shift 69
+	FALSO  shift 70
 	ID  shift 50
-	CARACTER  shift 70
-	CADENA  shift 71
-	NUM  shift 72
-	NOT  shift 73
-	A_PAR  shift 74
+	CARACTER  shift 71
+	CADENA  shift 72
+	NUM  shift 73
+	NOT  shift 74
+	A_PAR  shift 75
 	.  error
 
-	e_bool  goto 127
-	variable  goto 76
-	expresion  goto 77
-	relacional  goto 78
-
-
-state 100
-	e_bool : e_bool AND . e_bool  (45)
-
-	VERDADERO  shift 68
-	FALSO  shift 69
-	ID  shift 50
-	CARACTER  shift 70
-	CADENA  shift 71
-	NUM  shift 72
-	NOT  shift 73
-	A_PAR  shift 74
-	.  error
-
-	e_bool  goto 128
-	variable  goto 76
-	expresion  goto 77
-	relacional  goto 78
-
-
-state 101
-	expresion : expresion MAS . expresion  (57)
-
-	ID  shift 50
-	CARACTER  shift 70
-	CADENA  shift 71
-	NUM  shift 72
-	A_PAR  shift 74
-	.  error
-
-	variable  goto 76
-	expresion  goto 129
+	e_bool  goto 129
+	variable  goto 77
+	expresion  goto 78
+	relacional  goto 79
 
 
 state 102
-	expresion : expresion MENOS . expresion  (58)
+	e_bool : e_bool AND . e_bool  (45)
 
+	VERDADERO  shift 69
+	FALSO  shift 70
 	ID  shift 50
-	CARACTER  shift 70
-	CADENA  shift 71
-	NUM  shift 72
-	A_PAR  shift 74
+	CARACTER  shift 71
+	CADENA  shift 72
+	NUM  shift 73
+	NOT  shift 74
+	A_PAR  shift 75
 	.  error
 
-	variable  goto 76
-	expresion  goto 130
+	e_bool  goto 130
+	variable  goto 77
+	expresion  goto 78
+	relacional  goto 79
 
 
 state 103
-	expresion : expresion MUL . expresion  (59)
+	expresion : expresion MAS . expresion  (57)
 
 	ID  shift 50
-	CARACTER  shift 70
-	CADENA  shift 71
-	NUM  shift 72
-	A_PAR  shift 74
+	CARACTER  shift 71
+	CADENA  shift 72
+	NUM  shift 73
+	A_PAR  shift 75
 	.  error
 
-	variable  goto 76
+	variable  goto 77
 	expresion  goto 131
 
 
 state 104
-	expresion : expresion DIV . expresion  (60)
+	expresion : expresion MENOS . expresion  (58)
 
 	ID  shift 50
-	CARACTER  shift 70
-	CADENA  shift 71
-	NUM  shift 72
-	A_PAR  shift 74
+	CARACTER  shift 71
+	CADENA  shift 72
+	NUM  shift 73
+	A_PAR  shift 75
 	.  error
 
-	variable  goto 76
+	variable  goto 77
 	expresion  goto 132
 
 
 state 105
-	expresion : expresion MODULO . expresion  (61)
+	expresion : expresion MUL . expresion  (59)
 
 	ID  shift 50
-	CARACTER  shift 70
-	CADENA  shift 71
-	NUM  shift 72
-	A_PAR  shift 74
+	CARACTER  shift 71
+	CADENA  shift 72
+	NUM  shift 73
+	A_PAR  shift 75
 	.  error
 
-	variable  goto 76
+	variable  goto 77
 	expresion  goto 133
 
 
 state 106
-	relacional : relacional DIFERENTE . relacional  (54)
+	expresion : expresion DIV . expresion  (60)
 
 	ID  shift 50
-	CARACTER  shift 70
-	CADENA  shift 71
-	NUM  shift 72
-	A_PAR  shift 74
+	CARACTER  shift 71
+	CADENA  shift 72
+	NUM  shift 73
+	A_PAR  shift 75
 	.  error
 
-	variable  goto 76
-	expresion  goto 77
-	relacional  goto 134
+	variable  goto 77
+	expresion  goto 134
 
 
 state 107
-	relacional : relacional IGUAL . relacional  (55)
+	expresion : expresion MODULO . expresion  (61)
 
 	ID  shift 50
-	CARACTER  shift 70
-	CADENA  shift 71
-	NUM  shift 72
-	A_PAR  shift 74
+	CARACTER  shift 71
+	CADENA  shift 72
+	NUM  shift 73
+	A_PAR  shift 75
 	.  error
 
-	variable  goto 76
-	expresion  goto 77
-	relacional  goto 135
+	variable  goto 77
+	expresion  goto 135
 
 
 state 108
-	relacional : relacional S_MAYOR . relacional  (50)
+	relacional : relacional DIFERENTE . relacional  (54)
 
 	ID  shift 50
-	CARACTER  shift 70
-	CADENA  shift 71
-	NUM  shift 72
-	A_PAR  shift 74
+	CARACTER  shift 71
+	CADENA  shift 72
+	NUM  shift 73
+	A_PAR  shift 75
 	.  error
 
-	variable  goto 76
-	expresion  goto 77
+	variable  goto 77
+	expresion  goto 78
 	relacional  goto 136
 
 
 state 109
-	relacional : relacional S_MAYORIG . relacional  (53)
+	relacional : relacional IGUAL . relacional  (55)
 
 	ID  shift 50
-	CARACTER  shift 70
-	CADENA  shift 71
-	NUM  shift 72
-	A_PAR  shift 74
+	CARACTER  shift 71
+	CADENA  shift 72
+	NUM  shift 73
+	A_PAR  shift 75
 	.  error
 
-	variable  goto 76
-	expresion  goto 77
+	variable  goto 77
+	expresion  goto 78
 	relacional  goto 137
 
 
 state 110
-	relacional : relacional S_MENOR . relacional  (51)
+	relacional : relacional S_MAYOR . relacional  (50)
 
 	ID  shift 50
-	CARACTER  shift 70
-	CADENA  shift 71
-	NUM  shift 72
-	A_PAR  shift 74
+	CARACTER  shift 71
+	CADENA  shift 72
+	NUM  shift 73
+	A_PAR  shift 75
 	.  error
 
-	variable  goto 76
-	expresion  goto 77
+	variable  goto 77
+	expresion  goto 78
 	relacional  goto 138
 
 
 state 111
-	relacional : relacional S_MENORIG . relacional  (52)
+	relacional : relacional S_MAYORIG . relacional  (53)
 
 	ID  shift 50
-	CARACTER  shift 70
-	CADENA  shift 71
-	NUM  shift 72
-	A_PAR  shift 74
+	CARACTER  shift 71
+	CADENA  shift 72
+	NUM  shift 73
+	A_PAR  shift 75
 	.  error
 
-	variable  goto 76
-	expresion  goto 77
+	variable  goto 77
+	expresion  goto 78
 	relacional  goto 139
 
 
 state 112
+	relacional : relacional S_MENOR . relacional  (51)
+
+	ID  shift 50
+	CARACTER  shift 71
+	CADENA  shift 72
+	NUM  shift 73
+	A_PAR  shift 75
+	.  error
+
+	variable  goto 77
+	expresion  goto 78
+	relacional  goto 140
+
+
+state 113
+	relacional : relacional S_MENORIG . relacional  (52)
+
+	ID  shift 50
+	CARACTER  shift 71
+	CADENA  shift 72
+	NUM  shift 73
+	A_PAR  shift 75
+	.  error
+
+	variable  goto 77
+	expresion  goto 78
+	relacional  goto 141
+
+
+state 114
 	sentencia : MIENTRAS e_bool HACER . sentencia FIN  (30)
 
 	ID  shift 50
@@ -1440,61 +1472,61 @@ state 112
 	TERMINAR  shift 59
 	.  error
 
-	sentencia  goto 140
+	sentencia  goto 142
 	variable  goto 62
 
 
-state 113
+state 115
 	sentencia : HACER sentencia MIENTRAS . e_bool PYC  (31)
 
-	VERDADERO  shift 68
-	FALSO  shift 69
+	VERDADERO  shift 69
+	FALSO  shift 70
 	ID  shift 50
-	CARACTER  shift 70
-	CADENA  shift 71
-	NUM  shift 72
-	NOT  shift 73
-	A_PAR  shift 74
+	CARACTER  shift 71
+	CADENA  shift 72
+	NUM  shift 73
+	NOT  shift 74
+	A_PAR  shift 75
 	.  error
 
-	e_bool  goto 141
-	variable  goto 76
-	expresion  goto 77
-	relacional  goto 78
+	e_bool  goto 143
+	variable  goto 77
+	expresion  goto 78
+	relacional  goto 79
 
 
-state 114
+state 116
 	sentencia : SEGUN A_PAR variable . C_PAR HACER casos predeterminado FIN  (32)
 
-	C_PAR  shift 142
+	C_PAR  shift 144
 	.  error
 
 
-state 115
+state 117
 	sentencia : ESCRIBIR expresion PYC .  (34)
 
 	.  reduce 34
 
 
-state 116
+state 118
 	sentencia : LEER variable PYC .  (35)
 
 	.  reduce 35
 
 
-state 117
+state 119
 	sentencia : DEVOLVER expresion PYC .  (37)
 
 	.  reduce 37
 
 
-state 118
+state 120
 	funciones : DEF tipo ID A_PAR argumentos C_PAR INICIO declaraciones sentencias FIN funciones .  (16)
 
 	.  reduce 16
 
 
-state 119
+state 121
 	sentencia : variable ASIG expresion . PYC  (33)
 	expresion : expresion . MAS expresion  (57)
 	expresion : expresion . MENOS expresion  (58)
@@ -1502,92 +1534,92 @@ state 119
 	expresion : expresion . DIV expresion  (60)
 	expresion : expresion . MODULO expresion  (61)
 
-	PYC  shift 143
-	MAS  shift 101
-	MENOS  shift 102
-	MUL  shift 103
-	DIV  shift 104
-	MODULO  shift 105
+	PYC  shift 145
+	MAS  shift 103
+	MENOS  shift 104
+	MUL  shift 105
+	DIV  shift 106
+	MODULO  shift 107
 	.  error
 
 
-state 120
-	arreglo : A_PAR expresion C_PAR .  (73)
-
-	.  reduce 73
-
-
-state 121
+state 122
 	variable_comp : A_PAR parametros C_PAR .  (70)
 
 	.  reduce 70
 
 
-state 122
+state 123
 	lista_param : lista_param COMA . expresion  (77)
 
 	ID  shift 50
-	CARACTER  shift 70
-	CADENA  shift 71
-	NUM  shift 72
-	A_PAR  shift 74
+	CARACTER  shift 71
+	CADENA  shift 72
+	NUM  shift 73
+	A_PAR  shift 75
 	.  error
 
-	variable  goto 76
-	expresion  goto 144
+	variable  goto 77
+	expresion  goto 146
 
 
-state 123
+state 124
+	arreglo : A_CORCHETE expresion C_CORCHETE .  (73)
+
+	.  reduce 73
+
+
+state 125
 	dato_est_sim : dato_est_sim PUNTO ID .  (71)
 
 	.  reduce 71
 
 
-state 124
+state 126
 	expresion : expresion . MAS expresion  (57)
 	expresion : expresion . MENOS expresion  (58)
 	expresion : expresion . MUL expresion  (59)
 	expresion : expresion . DIV expresion  (60)
 	expresion : expresion . MODULO expresion  (61)
-	arreglo : arreglo A_PAR expresion . C_PAR  (74)
+	arreglo : arreglo A_CORCHETE expresion . C_CORCHETE  (74)
 
-	MAS  shift 101
-	MENOS  shift 102
-	MUL  shift 103
-	DIV  shift 104
-	MODULO  shift 105
-	C_PAR  shift 145
+	MAS  shift 103
+	MENOS  shift 104
+	MUL  shift 105
+	DIV  shift 106
+	MODULO  shift 107
+	C_CORCHETE  shift 147
 	.  error
 
 
-state 125
+state 127
 	expresion : A_PAR expresion C_PAR .  (62)
 
 	.  reduce 62
 
 
-state 126
+state 128
 	sentencia : SI e_bool ENTONCES sentencia . FIN  (28)
 	sentencia : SI e_bool ENTONCES sentencia . SINO sentencia FIN  (29)
 
-	FIN  shift 146
-	SINO  shift 147
+	FIN  shift 148
+	SINO  shift 149
 	.  error
 
 
-state 127
+state 129
 	e_bool : e_bool . OR e_bool  (44)
 	e_bool : e_bool OR e_bool .  (44)
 	e_bool : e_bool . AND e_bool  (45)
 
-	AND  shift 100
+	AND  shift 102
 	PYC  reduce 44
 	ENTONCES  reduce 44
 	HACER  reduce 44
 	OR  reduce 44
 
 
-state 128
+state 130
 	e_bool : e_bool . OR e_bool  (44)
 	e_bool : e_bool . AND e_bool  (45)
 	e_bool : e_bool AND e_bool .  (45)
@@ -1595,7 +1627,7 @@ state 128
 	.  reduce 45
 
 
-state 129
+state 131
 	expresion : expresion . MAS expresion  (57)
 	expresion : expresion MAS expresion .  (57)
 	expresion : expresion . MENOS expresion  (58)
@@ -1603,9 +1635,9 @@ state 129
 	expresion : expresion . DIV expresion  (60)
 	expresion : expresion . MODULO expresion  (61)
 
-	MUL  shift 103
-	DIV  shift 104
-	MODULO  shift 105
+	MUL  shift 105
+	DIV  shift 106
+	MODULO  shift 107
 	COMA  reduce 57
 	PYC  reduce 57
 	ENTONCES  reduce 57
@@ -1621,9 +1653,10 @@ state 129
 	MAS  reduce 57
 	MENOS  reduce 57
 	C_PAR  reduce 57
+	C_CORCHETE  reduce 57
 
 
-state 130
+state 132
 	expresion : expresion . MAS expresion  (57)
 	expresion : expresion . MENOS expresion  (58)
 	expresion : expresion MENOS expresion .  (58)
@@ -1631,9 +1664,9 @@ state 130
 	expresion : expresion . DIV expresion  (60)
 	expresion : expresion . MODULO expresion  (61)
 
-	MUL  shift 103
-	DIV  shift 104
-	MODULO  shift 105
+	MUL  shift 105
+	DIV  shift 106
+	MODULO  shift 107
 	COMA  reduce 58
 	PYC  reduce 58
 	ENTONCES  reduce 58
@@ -1649,9 +1682,10 @@ state 130
 	MAS  reduce 58
 	MENOS  reduce 58
 	C_PAR  reduce 58
+	C_CORCHETE  reduce 58
 
 
-state 131
+state 133
 	expresion : expresion . MAS expresion  (57)
 	expresion : expresion . MENOS expresion  (58)
 	expresion : expresion . MUL expresion  (59)
@@ -1662,7 +1696,7 @@ state 131
 	.  reduce 59
 
 
-state 132
+state 134
 	expresion : expresion . MAS expresion  (57)
 	expresion : expresion . MENOS expresion  (58)
 	expresion : expresion . MUL expresion  (59)
@@ -1673,7 +1707,7 @@ state 132
 	.  reduce 60
 
 
-state 133
+state 135
 	expresion : expresion . MAS expresion  (57)
 	expresion : expresion . MENOS expresion  (58)
 	expresion : expresion . MUL expresion  (59)
@@ -1684,7 +1718,7 @@ state 133
 	.  reduce 61
 
 
-state 134
+state 136
 	relacional : relacional . S_MAYOR relacional  (50)
 	relacional : relacional . S_MENOR relacional  (51)
 	relacional : relacional . S_MENORIG relacional  (52)
@@ -1693,10 +1727,10 @@ state 134
 	relacional : relacional DIFERENTE relacional .  (54)
 	relacional : relacional . IGUAL relacional  (55)
 
-	S_MAYOR  shift 108
-	S_MAYORIG  shift 109
-	S_MENOR  shift 110
-	S_MENORIG  shift 111
+	S_MAYOR  shift 110
+	S_MAYORIG  shift 111
+	S_MENOR  shift 112
+	S_MENORIG  shift 113
 	PYC  reduce 54
 	ENTONCES  reduce 54
 	HACER  reduce 54
@@ -1706,7 +1740,7 @@ state 134
 	IGUAL  reduce 54
 
 
-state 135
+state 137
 	relacional : relacional . S_MAYOR relacional  (50)
 	relacional : relacional . S_MENOR relacional  (51)
 	relacional : relacional . S_MENORIG relacional  (52)
@@ -1715,10 +1749,10 @@ state 135
 	relacional : relacional . IGUAL relacional  (55)
 	relacional : relacional IGUAL relacional .  (55)
 
-	S_MAYOR  shift 108
-	S_MAYORIG  shift 109
-	S_MENOR  shift 110
-	S_MENORIG  shift 111
+	S_MAYOR  shift 110
+	S_MAYORIG  shift 111
+	S_MENOR  shift 112
+	S_MENORIG  shift 113
 	PYC  reduce 55
 	ENTONCES  reduce 55
 	HACER  reduce 55
@@ -1728,7 +1762,7 @@ state 135
 	IGUAL  reduce 55
 
 
-state 136
+state 138
 	relacional : relacional . S_MAYOR relacional  (50)
 	relacional : relacional S_MAYOR relacional .  (50)
 	relacional : relacional . S_MENOR relacional  (51)
@@ -1740,7 +1774,7 @@ state 136
 	.  reduce 50
 
 
-state 137
+state 139
 	relacional : relacional . S_MAYOR relacional  (50)
 	relacional : relacional . S_MENOR relacional  (51)
 	relacional : relacional . S_MENORIG relacional  (52)
@@ -1752,7 +1786,7 @@ state 137
 	.  reduce 53
 
 
-state 138
+state 140
 	relacional : relacional . S_MAYOR relacional  (50)
 	relacional : relacional . S_MENOR relacional  (51)
 	relacional : relacional S_MENOR relacional .  (51)
@@ -1764,7 +1798,7 @@ state 138
 	.  reduce 51
 
 
-state 139
+state 141
 	relacional : relacional . S_MAYOR relacional  (50)
 	relacional : relacional . S_MENOR relacional  (51)
 	relacional : relacional . S_MENORIG relacional  (52)
@@ -1776,38 +1810,38 @@ state 139
 	.  reduce 52
 
 
-state 140
+state 142
 	sentencia : MIENTRAS e_bool HACER sentencia . FIN  (30)
 
-	FIN  shift 148
-	.  error
-
-
-state 141
-	sentencia : HACER sentencia MIENTRAS e_bool . PYC  (31)
-	e_bool : e_bool . OR e_bool  (44)
-	e_bool : e_bool . AND e_bool  (45)
-
-	PYC  shift 149
-	OR  shift 99
-	AND  shift 100
-	.  error
-
-
-state 142
-	sentencia : SEGUN A_PAR variable C_PAR . HACER casos predeterminado FIN  (32)
-
-	HACER  shift 150
+	FIN  shift 150
 	.  error
 
 
 state 143
+	sentencia : HACER sentencia MIENTRAS e_bool . PYC  (31)
+	e_bool : e_bool . OR e_bool  (44)
+	e_bool : e_bool . AND e_bool  (45)
+
+	PYC  shift 151
+	OR  shift 101
+	AND  shift 102
+	.  error
+
+
+state 144
+	sentencia : SEGUN A_PAR variable C_PAR . HACER casos predeterminado FIN  (32)
+
+	HACER  shift 152
+	.  error
+
+
+state 145
 	sentencia : variable ASIG expresion PYC .  (33)
 
 	.  reduce 33
 
 
-state 144
+state 146
 	expresion : expresion . MAS expresion  (57)
 	expresion : expresion . MENOS expresion  (58)
 	expresion : expresion . MUL expresion  (59)
@@ -1815,28 +1849,28 @@ state 144
 	expresion : expresion . MODULO expresion  (61)
 	lista_param : lista_param COMA expresion .  (77)
 
-	MAS  shift 101
-	MENOS  shift 102
-	MUL  shift 103
-	DIV  shift 104
-	MODULO  shift 105
+	MAS  shift 103
+	MENOS  shift 104
+	MUL  shift 105
+	DIV  shift 106
+	MODULO  shift 107
 	COMA  reduce 77
 	C_PAR  reduce 77
 
 
-state 145
-	arreglo : arreglo A_PAR expresion C_PAR .  (74)
+state 147
+	arreglo : arreglo A_CORCHETE expresion C_CORCHETE .  (74)
 
 	.  reduce 74
 
 
-state 146
+state 148
 	sentencia : SI e_bool ENTONCES sentencia FIN .  (28)
 
 	.  reduce 28
 
 
-state 147
+state 149
 	sentencia : SI e_bool ENTONCES sentencia SINO . sentencia FIN  (29)
 
 	ID  shift 50
@@ -1851,85 +1885,85 @@ state 147
 	TERMINAR  shift 59
 	.  error
 
-	sentencia  goto 151
+	sentencia  goto 153
 	variable  goto 62
 
 
-state 148
+state 150
 	sentencia : MIENTRAS e_bool HACER sentencia FIN .  (30)
 
 	.  reduce 30
 
 
-state 149
+state 151
 	sentencia : HACER sentencia MIENTRAS e_bool PYC .  (31)
 
 	.  reduce 31
 
 
-state 150
+state 152
 	sentencia : SEGUN A_PAR variable C_PAR HACER . casos predeterminado FIN  (32)
 
-	CASO  shift 152
+	CASO  shift 154
 	.  error
 
-	casos  goto 153
-
-
-state 151
-	sentencia : SI e_bool ENTONCES sentencia SINO sentencia . FIN  (29)
-
-	FIN  shift 154
-	.  error
-
-
-state 152
-	casos : CASO . NUM D_PUNTOS sentencia casos  (40)
-	casos : CASO . NUM D_PUNTOS sentencia  (41)
-
-	NUM  shift 155
-	.  error
+	casos  goto 155
 
 
 state 153
-	sentencia : SEGUN A_PAR variable C_PAR HACER casos . predeterminado FIN  (32)
-	predeterminado : .  (43)
+	sentencia : SI e_bool ENTONCES sentencia SINO sentencia . FIN  (29)
 
-	PRED  shift 156
-	FIN  reduce 43
-
-	predeterminado  goto 157
+	FIN  shift 156
+	.  error
 
 
 state 154
+	casos : CASO . NUM D_PUNTOS sentencia casos  (40)
+	casos : CASO . NUM D_PUNTOS sentencia  (41)
+
+	NUM  shift 157
+	.  error
+
+
+state 155
+	sentencia : SEGUN A_PAR variable C_PAR HACER casos . predeterminado FIN  (32)
+	predeterminado : .  (43)
+
+	PRED  shift 158
+	FIN  reduce 43
+
+	predeterminado  goto 159
+
+
+state 156
 	sentencia : SI e_bool ENTONCES sentencia SINO sentencia FIN .  (29)
 
 	.  reduce 29
 
 
-state 155
+state 157
 	casos : CASO NUM . D_PUNTOS sentencia casos  (40)
 	casos : CASO NUM . D_PUNTOS sentencia  (41)
 
-	D_PUNTOS  shift 158
-	.  error
-
-
-state 156
-	predeterminado : PRED . D_PUNTOS sentencia  (42)
-
-	D_PUNTOS  shift 159
-	.  error
-
-
-state 157
-	sentencia : SEGUN A_PAR variable C_PAR HACER casos predeterminado . FIN  (32)
-
-	FIN  shift 160
+	D_PUNTOS  shift 160
 	.  error
 
 
 state 158
+	predeterminado : PRED . D_PUNTOS sentencia  (42)
+
+	D_PUNTOS  shift 161
+	.  error
+
+
+state 159
+	sentencia : SEGUN A_PAR variable C_PAR HACER casos predeterminado . FIN  (32)
+
+	FIN  shift 162
+	.  error
+
+
+state 160
 	casos : CASO NUM D_PUNTOS . sentencia casos  (40)
 	casos : CASO NUM D_PUNTOS . sentencia  (41)
 
@@ -1945,11 +1979,11 @@ state 158
 	TERMINAR  shift 59
 	.  error
 
-	sentencia  goto 161
+	sentencia  goto 163
 	variable  goto 62
 
 
-state 159
+state 161
 	predeterminado : PRED D_PUNTOS . sentencia  (42)
 
 	ID  shift 50
@@ -1964,41 +1998,38 @@ state 159
 	TERMINAR  shift 59
 	.  error
 
-	sentencia  goto 162
+	sentencia  goto 164
 	variable  goto 62
 
 
-state 160
+state 162
 	sentencia : SEGUN A_PAR variable C_PAR HACER casos predeterminado FIN .  (32)
 
 	.  reduce 32
 
 
-state 161
+state 163
 	casos : CASO NUM D_PUNTOS sentencia . casos  (40)
 	casos : CASO NUM D_PUNTOS sentencia .  (41)
 
-	CASO  shift 152
+	CASO  shift 154
 	FIN  reduce 41
 	PRED  reduce 41
 
-	casos  goto 163
+	casos  goto 165
 
 
-state 162
+state 164
 	predeterminado : PRED D_PUNTOS sentencia .  (42)
 
 	.  reduce 42
 
 
-state 163
+state 165
 	casos : CASO NUM D_PUNTOS sentencia casos .  (40)
 
 	.  reduce 40
 
 
-State 90 contains 1 shift/reduce conflict.
-
-
 56 terminals, 27 nonterminals
-79 grammar rules, 164 states
+79 grammar rules, 166 states
