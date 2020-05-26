@@ -1,13 +1,14 @@
-/* Creación Felix G. 23/05/20 */
-/* Definición de tokens*/
-/*y variables especiales de flex*/
-//DEFINICION DE LOS TERMINALES
+/* Creación Felix G. 23/05/20 
+   Definición de tokens y variables especiales de flex
+   DEFINICION DE LOS TERMINALES
+*/
 #ifndef TOKENS_H
 #define TOKENS_H
 
-// Modif. Cristian Valeriano 24/05/2020 se agrego tokens faltantes
-//Modif. Felix Gonzalez 25/05/2020 se agrego numero de direccion de memoria
-//Definimos las cosntantes para cada simbolo terminal
+/* Modif. Cristian Valeriano 24/05/2020 se agrego tokens faltantes
+   Modif. Felix Gonzalez 25/05/2020 se agrego numero de direccion de memoria
+   Definimos las cosntantes para cada simbolo terminal
+*/
 #define ESTRUCTURA 200
 #define INICIO 201
 #define FIN 203
