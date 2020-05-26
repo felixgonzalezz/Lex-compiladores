@@ -59,5 +59,7 @@
 #define FALSO 248
 #define PUNTO 249
 #define ID 250
+#define FLOTANTE 251
+#define DOBLE 252
 
 #endif

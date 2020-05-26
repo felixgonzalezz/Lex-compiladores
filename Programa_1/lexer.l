@@ -4,7 +4,8 @@
 
 %{
 #include <stdio.h>
-#include "tokens.h"
+#include <stdlib.h>
+#include "y.tab.h"
 %}
 
 /*Indicar que solo lea un fichero de entrada*/
@@ -13,14 +14,16 @@
 %option yylineno
 
 /*Identificadores*/
-caracter [a-zA-Z_]
+
+caracter [a-zA-Z_] 
 digito [0-9]
 digitos {digito}+
-exp (e|E)(+|-)?{digitos}
-doble ((\.{digitos}|{digitos}\.{digitos}){exp}|{digitos}{exp})(lf|lF)
-flotante ((\.{digitos}|{digitos}\.{digitos}){exp}|{digitos}{exp})[fF]
+exp [eE][+-]?{digitos}
+doble (("."{digitos}|{digitos}"."{digitos}){exp}|{digitos}{exp})(lf|lF)
+flotante (("."{digitos}|{digitos}"."{digitos}){exp}|{digitos}{exp})[fF]
 num  (([1-9]{digito}+)|[0])
 id  (caracter|_)(caracter|digito|_)*
+cadena (\“~(\”)*\”)|(\‘~(\’)*\’)
 
 /*Expresiones regulares*/
 /* Modificación Simón R. 24/05/20*/
@@ -58,8 +61,8 @@ id  (caracter|_)(caracter|digito|_)*
 "def"               { return DEF;}
 "."                 { return PUNTO; }
 {doble}				{ return DOBLE; }
-{flotante}			{ return FLOTANTE; }
-{num}               { return NUM; }
+{flotante}			{ yylval.val = atof(yytext); return FLOTANTE; }
+{num}               { yylval.val = atoi(yytext); return NUM; }
 "si"                { return SI; }
 "entonces"          { return ENTONCES; }
 "sino"              { return SINO; }
@@ -79,6 +82,8 @@ id  (caracter|_)(caracter|digito|_)*
 "no"                { return NOT; }
 "verdadero"         { return VERDADERO; }
 "falso"             { return FALSO; }
+{caracter}			{ return CARACTER; }
+{cadena}			{ return CADENA; }
 {id}                { return ID; } /*En caso de encontrar algo del identificador*/ 
 [ \t\n\r]+          {}			/*Para que espacios en blanco sean ignorados*/
 .                   {  {printf("Error Lexico: %s\n", yytext);} } /*Para los simbolos no reconocidos error lexico*/
