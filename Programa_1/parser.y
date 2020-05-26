@@ -61,6 +61,7 @@ void yyerror(char *s);
 %right NOT
 /* Agrupación */
 %nonassoc A_LLAVE C_LLAVE A_PAR C_PAR A_CORCHETE C_CORCHETE PUNTO
+%start programa
 
 
 %%
