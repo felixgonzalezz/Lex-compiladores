@@ -5,8 +5,6 @@
 %{
 #include <stdio.h>
 #include "tokens.h"
-
-void error(char *s);
 %}
 
 /*Indicar que solo lea un fichero de entrada*/
@@ -81,31 +79,5 @@ id  (caracter|_)(caracter|digito|_)*
 "."                 { return PUNTO; }
 {id}                { return ID; } /*En caso de encontrar algo del identificador*/ 
 [ \t\n\r]+          {}			/*Para que espacios en blanco sean ignorados*/
-.                   {  error(yytext); } /*Para los simbolos no reconocidos error lexico*/
+.                   {  {printf("Error Lexico: %s\n", yytext);} } /*Para los simbolos no reconocidos error lexico*/
 %%
-
-void error(char *s){
-	printf("Error léxico: %s, línea: %d \n", s, yylineno);
-}
-
-/*Función para probar el lexer con archivo de entrada*/ 
-int main(int argc, char **argv){
-	FILE *f;
-	if(argc<2){
-		printf("Falta el archivo\n");
-		exit(-1);
-	}
-	f = fopen(argv[1],"r");
-	if(!f){
-		printf("No se pudo abrir el archivo\n");
-		exit(-1);
-	}
-	yyin = f;
-	int tok = yylex();
-	while(tok != 0){
-		printf("<%d\n", tok);
-		tok = yylex();
-	}
-	fclose(yyin);
-	return 0;
-}
