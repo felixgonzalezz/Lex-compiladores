@@ -25,7 +25,8 @@ id  (caracter|_)(caracter|digito|_)*
 /*Expresiones regulares*/
 /* Modificación Simón R. 24/05/20*/
 /*Se separan los símbolos terminales para que retornen token individuales.*/
-
+/* Modificación Simón R. 25/05/20*/
+/*Agregué expresiones para flotantes y dobles.*/
 %%
 "estructura"        { return ESTRUCTURA; }
 "inicio"            { return INICIO; }
@@ -55,8 +56,10 @@ id  (caracter|_)(caracter|digito|_)*
 "="                 { return IGUAL; }
 ","                 { return COMA; }
 "def"               { return DEF;}
+"."                 { return PUNTO; }
+{doble}				{ return DOBLE; }
+{flotante}			{ return FLOTANTE; }
 {num}               { return NUM; }
-
 "si"                { return SI; }
 "entonces"          { return ENTONCES; }
 "sino"              { return SINO; }
@@ -76,7 +79,6 @@ id  (caracter|_)(caracter|digito|_)*
 "no"                { return NOT; }
 "verdadero"         { return VERDADERO; }
 "falso"             { return FALSO; }
-"."                 { return PUNTO; }
 {id}                { return ID; } /*En caso de encontrar algo del identificador*/ 
 [ \t\n\r]+          {}			/*Para que espacios en blanco sean ignorados*/
 .                   {  {printf("Error Lexico: %s\n", yytext);} } /*Para los simbolos no reconocidos error lexico*/
