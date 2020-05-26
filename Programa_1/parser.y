@@ -1,6 +1,8 @@
 %{
 /*Sección de declaraciones*/
 #include <stdio.h>
+extern int yylineno;
+extern char* yytext;
 extern int yylex();
 void yyerror(char *s);
 %}
@@ -61,16 +63,16 @@ void yyerror(char *s);
 %right NOT
 /* Agrupación */
 %nonassoc A_LLAVE C_LLAVE A_PAR C_PAR A_CORCHETE C_CORCHETE PUNTO
-%start programa
 
+%start programa
 
 %%
 /*Sección del esquema de traducción, usa BNF simplificada*/
 
 programa : declaraciones funciones ;
 
-declaraciones : tipo lista_var PYC declaraciones
-        | tipo_registro lista_var PYC declaraciones | ;
+declaraciones : tipo lista_var PYC declaraciones {printf("D-> T L ; D");}
+        | tipo_registro lista_var PYC declaraciones | {printf("D->€");};
 
 tipo_registro : ESTRUCTURA INICIO  declaraciones FIN ;
 
@@ -80,8 +82,8 @@ base : ENT | REAL | DREAL | CAR | SIN ;
 
 tipo_arreglo : A_CORCHETE NUM C_CORCHETE tipo_arreglo | ;
 
-lista_var : lista_var COMA ID
-        | ID ;
+lista_var : lista_var COMA ID {printf("L-> L, id");}
+        | ID {printf("L->id");} ;
 
 funciones : DEF tipo ID A_PAR argumentos C_PAR INICIO declaraciones sentencias FIN funciones | ;
 
@@ -163,5 +165,5 @@ lista_param : lista_param COMA expresion
 
 
 void yyerror (char *s){
-    printf("%s\n",s);
+    printf("%s linea %d texto %s\n",s , yylineno, yytext);
 }

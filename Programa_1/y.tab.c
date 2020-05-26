@@ -20,9 +20,11 @@
 #line 2 "parser.y"
 /*Sección de declaraciones*/
 #include <stdio.h>
+extern int yylineno;
+extern char* yytext;
 extern int yylex();
 void yyerror(char *s);
-#line 26 "y.tab.c"
+#line 28 "y.tab.c"
 
 #if ! defined(YYSTYPE) && ! defined(YYSTYPE_IS_DECLARED)
 /* Default: YYSTYPE is the semantic value type. */
@@ -437,14 +439,14 @@ typedef struct {
 } YYSTACKDATA;
 /* variables for the parser stack */
 static YYSTACKDATA yystack;
-#line 161 "parser.y"
+#line 164 "parser.y"
 /*Sección de código de usuario*/
 
 
 void yyerror (char *s){
-    printf("%s\n",s);
+    printf("%s linea %d texto %s\n",s , yylineno, yytext);
 }
-#line 448 "y.tab.c"
+#line 450 "y.tab.c"
 
 #if YYDEBUG
 #include <stdio.h>		/* needed for printf */
@@ -646,6 +648,23 @@ yyreduce:
         memset(&yyval, 0, sizeof yyval);
     switch (yyn)
     {
+case 2:
+#line 74 "parser.y"
+	{printf("D-> T L ; D");}
+break;
+case 4:
+#line 75 "parser.y"
+	{printf("D->€");}
+break;
+case 14:
+#line 85 "parser.y"
+	{printf("L-> L, id");}
+break;
+case 15:
+#line 86 "parser.y"
+	{printf("L->id");}
+break;
+#line 668 "y.tab.c"
     }
     yystack.s_mark -= yym;
     yystate = *yystack.s_mark;

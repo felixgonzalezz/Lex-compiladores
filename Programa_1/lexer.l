@@ -15,15 +15,16 @@
 
 /*Identificadores*/
 
-caracter [a-zA-Z_] 
+letra [a-zA-Z] 
+caracter (\'{letra}\')
 digito [0-9]
 digitos {digito}+
 exp [eE][+-]?{digitos}
 doble (("."{digitos}|{digitos}"."{digitos}){exp}|{digitos}{exp})(lf|lF)
 flotante (("."{digitos}|{digitos}"."{digitos}){exp}|{digitos}{exp})[fF]
 num  (([1-9]{digito}+)|[0])
-id  (caracter|_)(caracter|digito|_)*
-cadena (\“~(\”)*\”)|(\‘~(\’)*\’)
+id  ({letra}|_)({letra}|digito|_)*
+cadena \"[^"]*\"
 
 /*Expresiones regulares*/
 /* Modificación Simón R. 24/05/20*/
