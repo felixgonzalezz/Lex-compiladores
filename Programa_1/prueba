@@ -2,7 +2,35 @@ ent x;
 real ya;
 dreal de;
 car e;
+ent [56][25]d;
 
-def sin _test(sin) inicio 
+estructura inicio
+    sin arriba, abajo1_, salir;
+    estructura inicio 
+        real huy;
+    fin variable_1, variable_3 ;
+fin variable_2;
+
+def sin _test(sin) inicio
+    x := 12;
+    e := 'q';
+    e := 'y'; 
+    escribir "Hola mundo";
+
     terminar;
+fin
+
+def real test2(dreal numero1, car df ) inicio
+    si verdadero y falso entonces
+        inicio
+            e := 'a' ;
+            de := 4.0e3 ;
+            ya := 78.0e-6f ;
+            
+        fin
+    sino
+        devolver (5 % 6) ;
     fin
+fin
+
+

@@ -19,11 +19,11 @@ letra [a-zA-Z]
 caracter (\'{letra}\')
 digito [0-9]
 digitos {digito}+
+num  (([1-9]{digito}*)|[0])
 exp [eE][+-]?{digitos}
-doble (("."{digitos}|{digitos}"."{digitos}){exp}|{digitos}{exp})(lf|lF)
-flotante (("."{digitos}|{digitos}"."{digitos}){exp}|{digitos}{exp})[fF]
-num  (([1-9]{digito}+)|[0])
-id  ({letra}|_)({letra}|digito|_)*
+doble (("."{digitos}|{digitos}"."{digitos}){exp}?|{digitos}{exp})
+flotante (("."{digitos}|{digitos}"."{digitos}){exp}?|{digitos}{exp})[fF]
+id  ({letra}|_)({letra}|{digito}|_)*
 cadena \"[^"]*\"
 
 /*Expresiones regulares*/
@@ -61,9 +61,6 @@ cadena \"[^"]*\"
 ","                 { return COMA; }
 "def"               { return DEF;}
 "."                 { return PUNTO; }
-{doble}				{ return NUM; }
-{flotante}			{ return NUM; }
-{num}               { return NUM; }
 "si"                { return SI; }
 "entonces"          { return ENTONCES; }
 "sino"              { return SINO; }
@@ -83,6 +80,9 @@ cadena \"[^"]*\"
 "no"                { return NOT; }
 "verdadero"         { return VERDADERO; }
 "falso"             { return FALSO; }
+{num}               { return NUM; }
+{flotante}			{ return NUM; }
+{doble}				{ return NUM; }
 {caracter}			{ return CARACTER; }
 {cadena}			{ return CADENA; }
 {id}                { return ID; } /*En caso de encontrar algo del identificador*/ 
