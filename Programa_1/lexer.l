@@ -31,6 +31,10 @@ cadena \"[^"]*\"
 /*Se separan los símbolos terminales para que retornen token individuales.*/
 /* Modificación Simón R. 25/05/20*/
 /*Agregué expresiones para flotantes y dobles.*/
+/*Declaracion de identificadores y correccion de simbolos mal */
+/*Implementados, junto con los comentarios incorrectos Daniel V. 25/05/20*/
+
+
 %%
 "estructura"        { return ESTRUCTURA; }
 "inicio"            { return INICIO; }
