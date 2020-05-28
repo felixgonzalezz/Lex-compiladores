@@ -1,3 +1,7 @@
+/* Creación Simon R. 26/05/20 */
+/* Definición de símbolos no terminales, uso de bibliotecas*/
+/*y variables */
+
 %{
 /*Sección de declaraciones*/
 #include <stdio.h>
@@ -7,6 +11,11 @@ extern int yylex();
 void yyerror(char *s);
 %}
 
+/* Modif. Simon R. 26/05/2020 crear token para los no terminales y 
+   reordenamiento de tokens por precedencia
+   Modif. Cristian Valeriano 24/05/2020 reordenamiento de tokens por precedencia
+   Modif. Felix Gonzalez 25/05/2020 reordenamiento de tokens por precedencia
+*/
 /* No terminales */
 %token COMA
 %token VERDADERO
@@ -61,12 +70,11 @@ void yyerror(char *s);
 %right NOT
 /* Agrupación */
 %nonassoc A_LLAVE C_LLAVE A_PAR C_PAR A_CORCHETE C_CORCHETE PUNTO
-
+/*Inicio de la gramatica*/
 %start programa
 
-%%
 /*Sección del esquema de traducción, usa BNF simplificada*/
-
+%%
 programa : declaraciones funciones ;
 
 declaraciones : tipo lista_var PYC declaraciones {printf("D-> T L ; D\n");}
