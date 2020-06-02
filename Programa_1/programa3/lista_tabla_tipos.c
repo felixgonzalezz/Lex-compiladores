@@ -1,12 +1,26 @@
 #include <stdio.h>
 #include "tabla_tipos.h"
 
-void append_type(TYPETAB *tt, SYM t){
-    TYPE *new_type;
+void append_type(TYPETAB *tt, TYPE t){
+    
+    TYPETAB *new_symbol, *temp_symbol;
+    TYPE new_symbol = (TYPE *) malloc (sizeof (TYPE));
 
-    /* if( (new_type = (SYM *) malloc(sizeof (SYM))) = NULL)
-        return -1;
-    new_type-> */
+    new_symbol. = t.args;
+    new_symbol->dir = t.dir;
+    new_symbol.id = t.id;
+    new_symbol->tipo = t.tipo;
+    new_symbol->var = t.var;
+    new_symbol->num = t.num;
+
+    new_symbol->next = NULL;
+
+    if(tt = NULL)
+        return new_symbol;
+    temp_symbol = tt;
+    while (temp_symbol->next != NULL)
+        tt = tt->next;
+
 }
 
 void clear_type_tab(TYPETAB *tt){
@@ -34,7 +48,7 @@ TYPE *init_type(){ // Reserva memoria para un tipo
 
 }
 
-void finish_sym_tab_stack(TSTACK *s){ // Libera la memoria para la pila
+void finish_sym_tab_stack(SSTACK *s){ // Libera la memoria para la pila
 
 }
 

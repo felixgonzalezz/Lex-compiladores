@@ -14,7 +14,7 @@ struct args{
     ARG *head;
     ARG *tail;
     int num; // numero de elementos en la lista
-} ;
+};
 
 typedef struct sym SYM;
 
@@ -78,6 +78,6 @@ typedef struct type_stack TSTACK;
 struct type_stack {
     TYPETAB *top;
     TYPETAB *tail;
-}  ;
+};
 
 #endif
