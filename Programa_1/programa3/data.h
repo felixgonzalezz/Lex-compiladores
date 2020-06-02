@@ -7,7 +7,7 @@ struct arg{
     int arg;
     ARG *next;
 };
-/**/
+
 typedef struct args ARGS;
 
 struct args{
