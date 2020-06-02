@@ -4,14 +4,13 @@
 void append_type(TYPETAB *tt, TYPE t){
     
     TYPETAB *new_symbol, *temp_symbol;
-    TYPE new_symbol = (TYPE *) malloc (sizeof (TYPE));
+    TYPE *new_symbol2 = (TYPE *) malloc (sizeof (TYPE));
 
-    new_symbol. = t.args;
-    new_symbol->dir = t.dir;
-    new_symbol.id = t.id;
-    new_symbol->tipo = t.tipo;
-    new_symbol->var = t.var;
-    new_symbol->num = t.num;
+    new_symbol2->next =NULL;
+
+    new_symbol->tail = new_symbol2->next;
+    new_symbol->tail->next;
+
 
     new_symbol->next = NULL;
 
