@@ -71,6 +71,6 @@ char* getNombre(TYPETAB *t, int id){ // retorna el nombre de un tipo tambien lo 
 
 }
 
-void print_tab(SYMTAB *t){
+void print_tab(TYPETAB *t){
 
 }
