@@ -2,7 +2,7 @@
 #define TYPETAB_H
 #include "data.h"
 
-void append_type(TYPETAB *tt, TYPE t); // Agrega al final de la tabla un nuevo tipo
+void append_type(TYPETAB *tt, TYPE *t); // Agrega al final de la tabla un nuevo tipo
 void clear_type_tab(TYPETAB *tt ); // Deja vacia la tabla
 
 TYPETAB pop_tt(TSTACK *s); // Ejecuta un pop sobre la pila de tablas de tipos

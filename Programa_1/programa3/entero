@@ -1,0 +1,13 @@
+TYPE *type = init_type();
+strcpy(type->nombre,"ent");
+TB tb;
+tb.is_est = 0;
+tb.tipo.tipo = -1;
+
+ent[10]
+
+TYPE *type = init_type();
+strcpy(type->nombre,"arreglo");
+TB tb;
+tb.is_est = 0;
+tb.tipo.tipo = 0;
