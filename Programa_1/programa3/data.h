@@ -50,7 +50,7 @@ struct tipobase{
     int is_est; // 1: si es estructura 0: si es tipo simple −1: s i no tiene tipo base
     union{
         SYMTAB *est;
-        int tipo;
+        int tipo_est;
     } tipo;
 };
 

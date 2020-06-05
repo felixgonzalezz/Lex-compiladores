@@ -5,7 +5,7 @@
 void append_type(TYPETAB *tt, TYPE *t); // Agrega al final de la tabla un nuevo tipo
 void clear_type_tab(TYPETAB *tt ); // Deja vacia la tabla
 
-TYPETAB pop_tt(TSTACK *s); // Ejecuta un pop sobre la pila de tablas de tipos
+TYPETAB *pop_tt(TSTACK *s); // Ejecuta un pop sobre la pila de tablas de tipos
 void push_tt(TSTACK *s, TYPETAB *tt); // Ingresa una tabla a la pila de tablas de tipos
 
 TSTACK *init_type_tab_stack(); // Reserva memoria para la pila  

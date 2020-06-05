@@ -11,5 +11,7 @@ int main(){
     insertar_lista(l, 4);
     imprimir_lista(l);
     eliminar_lista(l);
+    printf("$$$$$$$$");
+    imprimir_lista(l);
     return 0;
 }
