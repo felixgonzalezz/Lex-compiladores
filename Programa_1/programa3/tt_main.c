@@ -27,9 +27,10 @@ int main(){
     table2 = pop_tt(stack);
     clear_type_tab(table);
     print_tab(table2);
-    finish_type_tab(table2);
-    //print_tab(table2);
+    table2=finish_type_tab(table2);
+    print_tab(table2);
     finish_type_tab_stack(stack);
+    stack = NULL;
     finish_type(type);
     return 0;
 }

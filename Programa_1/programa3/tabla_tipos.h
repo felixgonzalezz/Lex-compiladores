@@ -13,7 +13,7 @@ TYPETAB *init_type_tab(); // Reserva memoria para una tabla de tipos e inserta l
 TYPE *init_type(); // Reserva memoria para un tipo
 
 void finish_type_tab_stack(TSTACK *s); // Libera la memoria para la pila
-void finish_type_tab(TYPETAB *st); // Libera memoria para una tabla de tipos
+TYPETAB *finish_type_tab(TYPETAB *st); // Libera memoria para una tabla de tipos
 void finish_type(TYPE *S); // libera memoria para un tipo
 
 int getTam(TYPETAB *t, int id); // Retorna el tam de un tipo

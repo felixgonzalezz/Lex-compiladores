@@ -28,20 +28,18 @@ void clear_type_tab(TYPETAB *tt){
 }
 
 TYPETAB *pop_tt(TSTACK *stack){
-    TYPETAB *tt_r = init_type_tab();
-    TYPETAB *tt_n = init_type_tab();
+    TYPETAB *tt_r;
     if(stack==NULL){//Caso lista nula
         printf("pila nula");
-        return tt_r;
+        return NULL;
     }
     if(stack->tail == NULL){//Caso lista vacía
         printf("pila vacía");
-        return tt_n;
+        return NULL;
     }
-    tt_n = stack->top;
-    stack->top = tt_n->next;
-    tt_n = tt_n;
-    free(tt_n->next);
+    tt_r = stack->top;
+    tt_r->next = NULL;
+    stack->top = stack->top->next;
     return tt_r;
 }
 
@@ -50,11 +48,13 @@ void push_tt(TSTACK *stack, TYPETAB *table){
         printf("pila o tabla nulas");
         return;
     }
-    TYPETAB *tt_n = init_type_tab();
-    tt_n = table;
-    stack->top = tt_n;
-    //stack->top->next = tt_n;
-    /////////////////////////////
+    if(stack->top == NULL){
+        stack->top = stack->tail = table;
+    }
+    else{
+        table->next = stack->top;
+        stack->top = table;
+    }
 }
 
 TSTACK *init_type_tab_stack(){ // Reserva memoria para la pila  
@@ -88,13 +88,14 @@ void finish_type_tab_stack(TSTACK *stack){ // Libera la memoria para la pila
     }
 }
 
-void finish_type_tab(TYPETAB *table){ // Libera memoria para una tabla de tipos
+TYPETAB *finish_type_tab(TYPETAB *table){ // Libera memoria para una tabla de tipos
     if(table!=NULL){
         if(table->head!=NULL)
             finish_type(table->head);
         free(table);
         table = NULL;
     }
+    return NULL;
 }
 
 void finish_type(TYPE *typ){// libera memoria para un tipo
@@ -140,13 +141,14 @@ char* getNombre(TYPETAB *table, int id){ // retorna el nombre de un tipo tambien
 
 
 void print_type(TYPE *typ){
-    //printf("id= %d  tam = \n",typ->tam);
+    printf("id= %d  tam = \n",typ->tam);
 }
 
 
 
 
 void print_tab(TYPETAB *table){
+    if(table == NULL || table->head==NULL) return;
     for(TYPE *i = table->head; i !=NULL; i = i->next ){
         print_type(i);
     }
