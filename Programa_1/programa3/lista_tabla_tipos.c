@@ -79,13 +79,14 @@ TYPE *init_type(){ // Reserva memoria para un tipo
     return type;
 }
 
-void finish_type_tab_stack(TSTACK *stack){ // Libera la memoria para la pila
+TSTACK *finish_type_tab_stack(TSTACK *stack){ // Libera la memoria para la pila
     if(stack!=NULL){
         if(stack->tail!=NULL)
             finish_type_tab(stack->tail);
         free(stack);
         stack = NULL;
     }
+    return NULL;
 }
 
 TYPETAB *finish_type_tab(TYPETAB *table){ // Libera memoria para una tabla de tipos
@@ -98,11 +99,12 @@ TYPETAB *finish_type_tab(TYPETAB *table){ // Libera memoria para una tabla de ti
     return NULL;
 }
 
-void finish_type(TYPE *typ){// libera memoria para un tipo
+TYPE *finish_type(TYPE *typ){// libera memoria para un tipo
     if(typ->next!=NULL)
         finish_type(typ->next);
     free (typ);
     typ = NULL;
+    return NULL;
 }
 
 int getTam(TYPETAB *table, int id){ // Retorna el tam de un tipo
