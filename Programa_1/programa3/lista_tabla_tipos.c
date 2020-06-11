@@ -58,10 +58,10 @@ void push_tt(TSTACK *stack, TYPETAB *table){
 }
 
 TSTACK *init_type_tab_stack(){ // Reserva memoria para la pila  
-    TSTACK *tsstack = (TSTACK *)malloc(sizeof(TSTACK));
-    tsstack->tail = NULL;
-    tsstack->top = NULL;
-    return tsstack;
+    TSTACK *tstack = (TSTACK *)malloc(sizeof(TSTACK));
+    tstack->tail = NULL;
+    tstack->top = NULL;
+    return tstack;
 }
 
 TYPETAB *init_type_tab(){ // Reserva memoria para una tabla de tipos e inserta los tipos nativos
