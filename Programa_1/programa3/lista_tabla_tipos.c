@@ -10,7 +10,6 @@ void append_type(TYPETAB *tt, TYPE *t){
         return;
     }
     //Caso lista con elementos
-
     tt->num++;
     t->id = tt->num;
     tt->tail->next = t;
@@ -108,36 +107,23 @@ TYPE *finish_type(TYPE *typ){// libera memoria para un tipo
 }
 
 int getTam(TYPETAB *table, int id){ // Retorna el tam de un tipo
-    TYPE *tt_n = init_type();
     if(table->num < id) return -1;
     for(TYPE *i = table->head;i !=NULL; i = i->next ){
-        if(i->id == id){
-            tt_n = i;
-            return tt_n->tam;
-    }
+        if(i->id == id) return i->tam;
    }
-    
 }
 
 TB getTipoBase(TYPETAB *table, int id){ // retorna el tipo base
-   TYPE *tt_n = init_type();
     if(table->num < id) printf("Error id fuera de la tabla");
     for(TYPE *i = table->head;i !=NULL; i = i->next ){
-        if(i->id == id){
-            tt_n = i;
-            return tt_n->tb;
-        }
+        if(i->id == id) return i->tb;  
     }
 }
 
 char* getNombre(TYPETAB *table, int id){ // retorna el nombre de un tipo tambien lo puede cambiar por un entero
-    TYPE *tt_n = init_type();
     if(table->num < id) printf("Error id fuera de la tabla");
     for(TYPE *i = table->head; i !=NULL; i = i->next ){
-        if(i->id == id){
-            tt_n = i;
-            return tt_n->nombre;
-        }
+        if(i->id == id) return i->nombre;
     }
 }
 
@@ -145,8 +131,6 @@ char* getNombre(TYPETAB *table, int id){ // retorna el nombre de un tipo tambien
 void print_type(TYPE *typ){
     printf("id= %d  tam = \n",typ->tam);
 }
-
-
 
 
 void print_tab(TYPETAB *table){

@@ -17,8 +17,15 @@ void append_arg (ARGS* args , ARG* arg) {//Agrega un argumento al final
     return;
 } 
 
-int compare_args (ARGS *a1 , ARGS *a2) { //Compara dos lista y devuelve 1 si son iguales , 0 si son diferentes
-
+int compare_args(ARGS *a1 , ARGS *a2) { //Compara dos lista y devuelve 1 si son iguales , 0 si son diferentes
+    ARGS *l1,*l2;
+    do
+    {
+        l1->head = a1->head->next;
+        l2->head = a2->head->next;
+        if(l1->head != l2->head) return 0;
+    } while (l1->head != a1->tail);
+    return 1;
 }
 
 void append_sym(SYMTAB *t , SYM *s) {//Agrega al final de la tabla un nuevo simbolo
@@ -43,7 +50,7 @@ SYMTAB *clear_sym_tab (SYMTAB *table ) {// Deja vacia la tabla
         free(table);
         table = NULL;
     }
-    //return NULL; duda si solo lo limpia
+    return NULL;
 } 
 
 SYMTAB *pop_st( SSTACK *stack ) {// Ejecuta un pop sobre la pila de tablas de simbolos
@@ -170,21 +177,31 @@ void print_tab (SYMTAB *table ) {// Imprime en pantalla l a tabla de simbolos
 }
 
 int getDir (SYMTAB *T , char *id ) {
-
+    for(SYM *i = T->head; i!=NULL; i=i->next){
+        if(i->id == id) return i->dir;
+    }
 }
 
 int getTipo (SYMTAB *T , char *id ) {
-
+    for(SYM *i = T->head; i!=NULL; i=i->next){
+        if(i->id == id) return i->tipo;
+    }
 }
 
-int getVar (SYMTAB *T , char *id ) {
-
+int getVar(SYMTAB *T , char *id ) {
+    for(SYM *i = T->head; i!=NULL; i=i->next){
+        if(i->id == id) return i->var;
+    }
 }
 
 ARGS* getArgs(SYMTAB *T , char *id ) {
-
+    for(SYM *i = T->head; i!=NULL; i=i->next){
+        if(i->id == id) return i->args;
+    }
 }
 
 int getNumArgs (SYMTAB *T , char *id ) {
-
+    for(SYM *i = T->head; i!=NULL; i=i->next){
+        if(i->id == id) return i->num;
+    }
 }
