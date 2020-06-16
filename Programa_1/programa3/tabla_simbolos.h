@@ -3,9 +3,9 @@
 #include <stdbool.h>
 #include "data.h"
 
-void append_arg (ARGS* args , int arg) ; //Agrega un argumento al final
+void append_arg (ARGS *args , ARG *arg) ; //Agrega un argumento al final
 int compare_args (ARGS *a1 , ARGS *a2) ; //Compara dos lista y devuelve 1 si son iguales , 0 si son diferentes
-void append_sym(SYMTAB *t , SYM s) ; //Agrega al final de la tabla un nuevo simbolo
+void append_sym(SYMTAB *t , SYM *s) ; //Agrega al final de la tabla un nuevo simbolo
 SYMTAB *clear_sym_tab (SYMTAB *t ) ; // Deja vacia la tabla
 
 SYMTAB *pop_st ( SSTACK *s ) ; // Ejecuta un pop sobre la pila de tablas de simbolos
