@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "tabla_simbolos.h"
 
-void append_arg (ARGS* args , ARG* arg) {//Agrega un argumento al final
+void append_arg (ARGS *args , ARG *arg) {//Agrega un argumento al final
     if(args==NULL) return;//Caso lista nula
     if(args->head == NULL){//Caso lista vacía
         args->tail = args->head = arg;
@@ -19,12 +19,14 @@ void append_arg (ARGS* args , ARG* arg) {//Agrega un argumento al final
 
 int compare_args(ARGS *a1 , ARGS *a2) { //Compara dos lista y devuelve 1 si son iguales , 0 si son diferentes
     ARGS *l1,*l2;
-    do
-    {
+    l1->head = a1->head;
+    l2->head = a2->head;
+
+    while (l1->head != a1->tail);{
+        if(l1->head != l2->head) return 0;
         l1->head = a1->head->next;
         l2->head = a2->head->next;
-        if(l1->head != l2->head) return 0;
-    } while (l1->head != a1->tail);
+    } 
     return 1;
 }
 
@@ -155,7 +157,7 @@ ARG *finish_arg (ARG *S ) {// libera memoria para un arg
     return NULL;
 } 
 
-ARG *finish_args (ARGS *table) {// libera memoria para una lista ARGS
+ARGS *finish_args (ARGS *table) {// libera memoria para una lista ARGS
     if(table!=NULL){
         if(table->head!=NULL)
             finish_type(table->head);
