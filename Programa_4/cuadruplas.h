@@ -14,7 +14,7 @@ typedef struct code{
 
 CUAD *init_cuad(); // Reserva memoria para una cuadrupla
 
-void finish_cuad(CUAD *c); // Libera la memoria de una cuadrupla
+void *finish_cuad(CUAD *c); // Libera la memoria de una cuadrupla
 
 CODE *init_code(); // Reserva memoria para el codigo
 
