@@ -34,6 +34,7 @@ struct sym_tab{
     SYM *head;
     SYM *tail;
     int num; //Numero de elementos en la tabla
+    TYPETAB *tt;
     SYMTAB *next; // apuntador a la tabla siguiente
 };
 

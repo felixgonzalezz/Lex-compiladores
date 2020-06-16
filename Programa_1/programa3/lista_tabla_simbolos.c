@@ -18,14 +18,14 @@ void append_arg (ARGS *args , ARG *arg) {//Agrega un argumento al final
 } 
 
 int compare_args(ARGS *a1 , ARGS *a2) { //Compara dos lista y devuelve 1 si son iguales , 0 si son diferentes
-    ARGS *l1,*l2;
-    l1->head = a1->head;
-    l2->head = a2->head;
-
-    while (l1->head != a1->tail);{
-        if(l1->head != l2->head) return 0;
-        l1->head = a1->head->next;
-        l2->head = a2->head->next;
+    ARG *l1,*l2;
+    l1 = a1->head;
+    l2 = a2->head;
+    if(a1->num != a2->num) return 0;
+    while (l1 != NULL);{
+        if(l1 != l2) return 0;
+        l1 = a1->head->next;
+        l2 = a2->head->next;
     } 
     return 1;
 }
@@ -112,6 +112,7 @@ SYMTAB *init_symtab ( ) { // Reserva memoria para una tabla de simbolos vacia
     symtab->tail = NULL;
     symtab->head = NULL;
     symtab->next = NULL;
+    symtab->tt = NULL;
     return symtab;
 } 
 
