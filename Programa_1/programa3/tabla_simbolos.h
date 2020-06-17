@@ -14,7 +14,7 @@ void push_st ( SSTACK *s , SYMTAB *st) ; // Ingresa una tabla a la pila de tabla
 ARGS *init_args ( ) ; // Retorna el apunador a un tipo ARGS
 ARG *init_arg ( int dato) ; // Reserva memoria para un tipo ARG y retorna el apuntador
 SSTACK *init_sym_tab_stack ( ) ; // Reserva memoria para la pila
-SYMTAB *init_symtab ( ) ; // Reserva memoria para una tabla de simbolos vacia
+SYMTAB *init_sym_tab(); // Reserva memoria para una tabla de simbolos vacia
 SYM *init_sym ( ) ; // Reserva memoria para un simbolo vacio
 
 SSTACK *finish_sym_tab_stack ( SSTACK *s ) ;  // Libera la memoria para la pila
@@ -23,7 +23,9 @@ SYM *finish_sym (SYM *S ) ; // libera memoria para un simbolo
 ARG *finish_arg (ARG *S ) ; // libera memoria para un arg
 ARGS *finish_args (ARGS *S ) ; // libera memoria para una lista ARGS
 
-void print_tab (SYMTAB *t ) ; // Imprime en pantalla l a tabla de simbolos
+void print_sym_tab(SYMTAB *t ) ; // Imprime en pantalla l a tabla de simbolos
+void print_arg_tab(ARGS *A);
+void print_arg(ARG *s);
 
 int getDir (SYMTAB *T , char *id ) ;
 int getTipo (SYMTAB *T , char *id ) ;

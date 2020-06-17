@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "tabla_tipos.h"
 
 void append_type(TYPETAB *tt, TYPE *t){
@@ -121,19 +122,21 @@ TB getTipoBase(TYPETAB *table, int id){ // retorna el tipo base
 }
 
 char* getNombre(TYPETAB *table, int id){ // retorna el nombre de un tipo tambien lo puede cambiar por un entero
+    char *ret;
     if(table->num < id) printf("Error id fuera de la tabla");
     for(TYPE *i = table->head; i !=NULL; i = i->next ){
-        if(i->id == id) return i->nombre;
+        if(i->id == id) strcpy(ret, i->nombre) ;
     }
+    return ret;
 }
 
 
 void print_type(TYPE *typ){
-    printf("id= %d  tam = \n",typ->tam);
+    printf("id= %d  tam = \n",typ->id);
 }
 
 
-void print_tab(TYPETAB *table){
+void print_type_tab(TYPETAB *table){
     if(table == NULL || table->head==NULL) return;
     for(TYPE *i = table->head; i !=NULL; i = i->next ){
         print_type(i);
