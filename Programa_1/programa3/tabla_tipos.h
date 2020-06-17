@@ -19,6 +19,6 @@ TYPE *finish_type(TYPE *S); // libera memoria para un tipo
 int getTam(TYPETAB *t, int id); // Retorna el tam de un tipo
 TB getTipoBase(TYPETAB *t, int id); // retorna el tipo base
 char* getNombre(TYPETAB *t, int id); // retorna el nombre de un tipo tambien lo puede cambiar por un entero
-void print_tab(TYPETAB *t); // Imprime en pantalla la tabla de tipos
+void print_type_tab(TYPETAB *t); // Imprime en pantalla la tabla de tipos
 
 #endif

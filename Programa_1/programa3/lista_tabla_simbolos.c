@@ -6,26 +6,25 @@ void append_arg (ARGS *args , ARG *arg) {//Agrega un argumento al final
     if(args==NULL) return;//Caso lista nula
     if(args->head == NULL){//Caso lista vacía
         args->tail = args->head = arg;
-        arg->arg = args->num;
+        args->num++;
         return;
     }
     //Caso lista con elementos
     args->num++;
-    arg->arg = args->num;
     args->tail->next = arg;
     args->tail = arg;
     return;
 } 
 
 int compare_args(ARGS *a1 , ARGS *a2) { //Compara dos lista y devuelve 1 si son iguales , 0 si son diferentes
-    ARGS *l1,*l2;
-    l1->head = a1->head;
-    l2->head = a2->head;
-
-    while (l1->head != a1->tail);{
-        if(l1->head != l2->head) return 0;
-        l1->head = a1->head->next;
-        l2->head = a2->head->next;
+    ARG *l1,*l2;
+    l1 = a1->head;
+    l2 = a2->head;
+    if(a1->num != a2->num) return 0;
+    while (l1 != NULL);{
+        if(l1 != l2) return 0;
+        l1 = a1->head->next;
+        l2 = a2->head->next;
     } 
     return 1;
 }
@@ -48,7 +47,7 @@ void append_sym(SYMTAB *t , SYM *s) {//Agrega al final de la tabla un nuevo simb
 SYMTAB *clear_sym_tab (SYMTAB *table ) {// Deja vacia la tabla
     if(table!=NULL){
         if(table->head!=NULL)
-            finish_type(table->head);
+            finish_sym(table->head);
         free(table);
         table = NULL;
     }
@@ -96,6 +95,7 @@ ARGS *init_args ( ) {// Retorna el apunador a un tipo ARGS
 ARG *init_arg ( int dato) {// Reserva memoria para un tipo ARG y retorna el apuntador
     ARG *arg = (ARG *)malloc(sizeof(ARG));
     arg->next = NULL;
+    arg->arg = dato;
     return arg;
 } 
 
@@ -106,7 +106,7 @@ SSTACK *init_sym_tab_stack ( ) {// Reserva memoria para la pila
     return sstack;
 } 
 
-SYMTAB *init_symtab ( ) { // Reserva memoria para una tabla de simbolos vacia
+SYMTAB *init_sym_tab ( ) { // Reserva memoria para una tabla de simbolos vacia
     SYMTAB *symtab = (SYMTAB *)malloc(sizeof(SYMTAB));
     symtab->num = 0; //Crea la tabla entonces tiene 0 elementos
     symtab->tail = NULL;
@@ -124,7 +124,7 @@ SYM *init_sym ( ) { // Reserva memoria para un simbolo vacio
 SSTACK *finish_sym_tab_stack (SSTACK *stack){// Libera la memoria para la pila
     if(stack!=NULL){
         if(stack->tail!=NULL)
-            finish_type_tab(stack->tail);
+            finish_sym_tab(stack->tail);
         free(stack);
         stack = NULL;
     }
@@ -134,7 +134,7 @@ SSTACK *finish_sym_tab_stack (SSTACK *stack){// Libera la memoria para la pila
 SYMTAB *finish_sym_tab (SYMTAB *table ) {// Libera memoria para una tabla de simbolos
     if(table!=NULL){
         if(table->head!=NULL)
-            finish_type(table->head);
+            finish_sym(table->head);
         free(table);
         table = NULL;
     }
@@ -142,25 +142,25 @@ SYMTAB *finish_sym_tab (SYMTAB *table ) {// Libera memoria para una tabla de sim
 } 
 
 SYM *finish_sym (SYM *S ) {// libera memoria para un simbolo
-    if(S->next!=NULL)
-        finish_Se(S->next);
-    free (S);
-    S = NULL;
-    return NULL;
+    if(S!=NULL){
+        free (S);
+        S = NULL;
+        return NULL;
+    }
 } 
 
 ARG *finish_arg (ARG *S ) {// libera memoria para un arg
-    if(S->next!=NULL)
-        finish_Se(S->next);
-    free (S);
-    S = NULL;
-    return NULL;
+    if(S!=NULL){
+        free (S);
+        S = NULL;
+        return NULL;
+    }
 } 
 
-ARGS *finish_args (ARGS *table) {// libera memoria para una lista ARGS
+ARGS *finish_args(ARGS *table){// libera memoria para una lista ARGS
     if(table!=NULL){
         if(table->head!=NULL)
-            finish_type(table->head);
+            finish_arg(table->head->next);
         free(table);
         table = NULL;
     }
@@ -171,10 +171,22 @@ void print_sym(SYM *s){
     printf("id= %d  tam = \n",s->dir);
 }
 
-void print_tab (SYMTAB *table ) {// Imprime en pantalla l a tabla de simbolos
+void print_sym_tab(SYMTAB *table ) {// Imprime en pantalla l a tabla de simbolos
     if(table == NULL || table->head==NULL) return;
-    for(TYPE *i = table->head; i !=NULL; i = i->next ){
+    for(SYM *i = table->head; i !=NULL; i = i->next ){
         print_sym(i);
+    }
+}
+
+
+void print_arg(ARG *s){
+    printf("arg= %d  tam = \n",s->arg);
+}
+
+void print_arg_tab(ARGS *table){
+    if(table == NULL || table->head==NULL) return;
+    for(ARG *i = table->head; i !=NULL; i = i->next ){
+        print_arg(i);
     }
 }
 
