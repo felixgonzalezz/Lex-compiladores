@@ -14,7 +14,7 @@ typedef struct listindex{
 
 INDEX *init_index();// Reserva memoria para un nodo de indice
 
-void finish_index(INDEX *i); // Libera la memoria de un nodo indice
+void *finish_index(INDEX *i); // Libera la memoria de un nodo indice
 
 LINDEX *init_list_index(INDEX *i); //Reserva memoria para la lista de indice se inserta el primero
 
