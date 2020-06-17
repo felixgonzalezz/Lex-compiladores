@@ -121,11 +121,14 @@ TB getTipoBase(TYPETAB *table, int id){ // retorna el tipo base
     }
 }
 
-char* getNombre(TYPETAB *table, int id){ // retorna el nombre de un tipo tambien lo puede cambiar por un entero
-    char *ret;
-    if(table->num < id) printf("Error id fuera de la tabla");
+char *getNombre(TYPETAB *table, int id){ // retorna el nombre de un tipo tambien lo puede cambiar por un entero
+    char *ret = malloc (sizeof(char) * sizeof(table->head->nombre));
+    if(table->num < id) {
+        printf("Error id fuera de la tabla");
+        //return ret;
+    }
     for(TYPE *i = table->head; i !=NULL; i = i->next ){
-        if(i->id == id) strcpy(ret, i->nombre) ;
+        if(i->id == id) sprintf(ret,"%s", i->nombre);
     }
     return ret;
 }
