@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "tabla_simbolos.h"
 
 void append_arg (ARGS *args , ARG *arg) {//Agrega un argumento al final
@@ -21,7 +22,7 @@ int compare_args(ARGS *a1 , ARGS *a2) { //Compara dos lista y devuelve 1 si son 
     l1 = a1->head;
     l2 = a2->head;
     if(a1->num != a2->num) return 0;
-    while (l1 != NULL);{
+    while (l1 != NULL){
         if(l1 != l2) return 0;
         l1 = a1->head->next;
         l2 = a2->head->next;
@@ -115,7 +116,7 @@ SYMTAB *init_sym_tab ( ) { // Reserva memoria para una tabla de simbolos vacia
     return symtab;
 } 
 
-SYM *init_sym ( ) { // Reserva memoria para un simbolo vacio
+SYM *init_sym () { // Reserva memoria para un simbolo vacio
     SYM *sym = (SYM *)malloc(sizeof(SYM));
     sym->next = NULL;
     return sym;
@@ -147,6 +148,7 @@ SYM *finish_sym (SYM *S ) {// libera memoria para un simbolo
         S = NULL;
         return NULL;
     }
+    return NULL;
 } 
 
 ARG *finish_arg (ARG *S ) {// libera memoria para un arg
@@ -155,6 +157,7 @@ ARG *finish_arg (ARG *S ) {// libera memoria para un arg
         S = NULL;
         return NULL;
     }
+    return NULL;
 } 
 
 ARGS *finish_args(ARGS *table){// libera memoria para una lista ARGS
@@ -190,32 +193,47 @@ void print_arg_tab(ARGS *table){
     }
 }
 
+char* strdup_s(const char* cad){
+    if(cad == NULL) return NULL;
+    char* newstr = malloc(strlen(cad)+1);
+    char* p;
+    if(newstr == NULL) return NULL;
+    p = newstr;
+    while(*cad) *p++ = *cad++;
+    return newstr;
+}
+
 int getDir (SYMTAB *T , char *id ) {
     for(SYM *i = T->head; i!=NULL; i=i->next){
         if(i->id == id) return i->dir;
     }
+    return -1;
 }
 
 int getTipo (SYMTAB *T , char *id ) {
     for(SYM *i = T->head; i!=NULL; i=i->next){
         if(i->id == id) return i->tipo;
     }
+    return -1;
 }
 
 int getVar(SYMTAB *T , char *id ) {
     for(SYM *i = T->head; i!=NULL; i=i->next){
         if(i->id == id) return i->var;
     }
+    return 'z';
 }
 
-ARGS* getArgs(SYMTAB *T , char *id ) {
+ARGS *getArgs(SYMTAB *T , char *id ) {
     for(SYM *i = T->head; i!=NULL; i=i->next){
         if(i->id == id) return i->args;
     }
+    return NULL;
 }
 
 int getNumArgs (SYMTAB *T , char *id ) {
     for(SYM *i = T->head; i!=NULL; i=i->next){
         if(i->id == id) return i->num;
     }
+    return -1;
 }

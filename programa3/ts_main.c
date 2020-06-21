@@ -101,19 +101,17 @@ int main(){
 
     printf("getTam = %d\n",getTam(ttable, type1->id));
     printf("tb.is_est = %d \n",type1->tb.is_est);
-//    TB tb1 = getTipoBase(ttable, type1->id);
-//    printf("getTipoBase = %d \n", tb1.is_est);
-//    sprintf(cadena ,"getNombre = %s\n", getNombre(ttable, type1->id));
-
+    TB tb1 = getTipoBase(ttable, type1->id);
+    printf("getTipoBase = %d \n", tb1.is_est);
     printf("Cadena getNombre = %s\n", getNombre(ttable, type1->id));
 
 
     printf("Probando Gets de simbolo\n");
-    printf("getDir = %d\n", getDir(stable, "funcion"));
-//    printf("getTipo = ")
-    printf("getVar = %d\n", getVar(stable, "variable"));
-//    printf("getArgs = ");
-    printf("getNumArgs = %d \n", getNumArgs(stable, "variable"));
+    printf("getDir = %d\n", getDir(stable, simbolo1->id));
+    printf("getTipo = %d\n", getTipo(stable, simbolo1->id));
+    printf("getVar = %d\n", getVar(stable, simbolo1->id));
+    printf("getArgs = %p\n", getArgs(stable, simbolo1->id));
+    printf("getNumArgs = %d \n", getNumArgs(stable, simbolo1->id));
 
     printf("Termine bien :)\n");
     return 0;

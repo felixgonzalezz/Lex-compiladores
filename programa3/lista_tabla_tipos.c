@@ -112,25 +112,36 @@ int getTam(TYPETAB *table, int id){ // Retorna el tam de un tipo
     for(TYPE *i = table->head;i !=NULL; i = i->next ){
         if(i->id == id) return i->tam;
    }
+   return -1;
 }
 
 TB getTipoBase(TYPETAB *table, int id){ // retorna el tipo base
+    TB tb;
     if(table->num < id) printf("Error id fuera de la tabla");
     for(TYPE *i = table->head;i !=NULL; i = i->next ){
         if(i->id == id) return i->tb;  
     }
+    tb.is_est =-2;
+    return tb;
 }
 
-char *getNombre(TYPETAB *table, int id){ // retorna el nombre de un tipo tambien lo puede cambiar por un entero
-    char *ret = malloc (sizeof(char) * sizeof(table->head->nombre));
-    if(table->num < id) {
-        printf("Error id fuera de la tabla");
-        //return ret;
-    }
+char* strdup_t(const char* cad){
+    if(cad == NULL) return NULL;
+    char* newstr = malloc(strlen(cad)+1);
+    char* p;
+    if(newstr == NULL) return NULL;
+    p = newstr;
+    while(*cad) *p++ = *cad++;
+    return newstr;
+}
+
+// retorna el nombre de un tipo tambien lo puede cambiar por un entero
+char *getNombre(TYPETAB *table, int id){
+    if(table->num < id) return NULL;
     for(TYPE *i = table->head; i !=NULL; i = i->next ){
-        if(i->id == id) sprintf(ret,"%s", i->nombre);
+        if(i->id == id) return strdup(i->nombre);
     }
-    return ret;
+    return NULL;
 }
 
 
