@@ -1,7 +1,8 @@
 /* Creación Simon R 26/05/20 */
 #include <stdio.h>
 
-//extern int yyparse();
+
+extern int yyparse();
 extern FILE *yyin;
 
 int main(int argc, char** argv){
@@ -16,6 +17,6 @@ int main(int argc, char** argv){
         return -1;
     }
     yyin = f;
-    //yyparse();
+    yyparse();
     fclose(yyin);
 }

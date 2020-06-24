@@ -5,6 +5,14 @@
 %{
 /*Sección de declaraciones*/
 #include <stdio.h>
+
+#include "backpatch.h"
+#include "cuadruplas.h"
+#include "data.h"
+#include "tabla_simbolos.h"
+#include "tabla_tipos.h"
+#include "tipos.h"
+
 extern int yylineno;
 extern char* yytext;
 extern int yylex();

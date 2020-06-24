@@ -17,7 +17,7 @@
 
 #define YYPURE 0
 
-#line 2 "parser.y"
+#line 6 "parser.y"
 /*Sección de declaraciones*/
 #include <stdio.h>
 extern int yylineno;
@@ -441,7 +441,7 @@ typedef struct {
 } YYSTACKDATA;
 /* variables for the parser stack */
 static YYSTACKDATA yystack;
-#line 162 "parser.y"
+#line 170 "parser.y"
 /*Sección de código de usuario*/
 
 
@@ -651,19 +651,19 @@ yyreduce:
     switch (yyn)
     {
 case 2:
-#line 72 "parser.y"
+#line 80 "parser.y"
 	{printf("D-> T L ; D\n");}
 break;
 case 4:
-#line 73 "parser.y"
+#line 81 "parser.y"
 	{printf("D->€\n");}
 break;
 case 14:
-#line 83 "parser.y"
+#line 91 "parser.y"
 	{printf("L-> L, id\n");}
 break;
 case 15:
-#line 84 "parser.y"
+#line 92 "parser.y"
 	{printf("L->id\n");}
 break;
 #line 670 "y.tab.c"
