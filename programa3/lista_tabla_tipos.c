@@ -146,7 +146,7 @@ char *getNombre(TYPETAB *table, int id){
 
 
 void print_type(TYPE *typ){
-    printf("id= %d  tam = \n",typ->id);
+    printf("id= %d  tipo \n",typ->id);
 }
 
 

@@ -171,7 +171,7 @@ ARGS *finish_args(ARGS *table){// libera memoria para una lista ARGS
 } 
 
 void print_sym(SYM *s){
-    printf("id= %d  tam = \n",s->dir);
+    printf("id= %d  simbolo \n",s->dir);
 }
 
 void print_sym_tab(SYMTAB *table ) {// Imprime en pantalla l a tabla de simbolos
@@ -225,6 +225,7 @@ int getVar(SYMTAB *T , char *id ) {
 }
 
 ARGS *getArgs(SYMTAB *T , char *id ) {
+    if(T==NULL) return NULL;
     for(SYM *i = T->head; i!=NULL; i=i->next){
         if(i->id == id) return i->args;
     }

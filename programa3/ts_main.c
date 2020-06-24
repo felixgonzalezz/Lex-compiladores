@@ -90,17 +90,17 @@ int main(){
     TYPETAB *poptt = pop_tt(tpila);
     print_type_tab(poptt);
 
-    printf("Finalizando pilas\n");
+/*     printf("Finalizando pilas\n");
     popst = finish_sym_tab(popst);
     poptt = finish_type_tab(poptt);
     print_sym_tab(popst);
-    print_type_tab(poptt);
+    print_type_tab(poptt); */
 
 
     printf("Probando Gets de tipo\n");
 
     printf("getTam = %d\n",getTam(ttable, type1->id));
-    printf("tb.is_est = %d \n",type1->tb.is_est);
+    printf("tb.is_est = %d \n", type1->tb.is_est);
     TB tb1 = getTipoBase(ttable, type1->id);
     printf("getTipoBase = %d \n", tb1.is_est);
     printf("Cadena getNombre = %s\n", getNombre(ttable, type1->id));
@@ -110,8 +110,8 @@ int main(){
     printf("getDir = %d\n", getDir(stable, simbolo1->id));
     printf("getTipo = %d\n", getTipo(stable, simbolo1->id));
     printf("getVar = %d\n", getVar(stable, simbolo1->id));
-    printf("getArgs = %p\n", getArgs(stable, simbolo1->id));
-    printf("getNumArgs = %d \n", getNumArgs(stable, simbolo1->id));
+    printf("getArgs = %p\n", getArgs(stable, simbolo2->id));
+    printf("getNumArgs = %d \n", getNumArgs(stable, simbolo1->id)); 
 
     printf("Termine bien :)\n");
     return 0;

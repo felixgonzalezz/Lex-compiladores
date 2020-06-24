@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include "cuadruplas.h"
 #include "backpatch.h"
 
 INDEX *init_index(){// Reserva memoria para un nodo de indice
@@ -34,14 +36,24 @@ void *finish_list_index(LINDEX *l){//Libera la memoria de la lista y de todos lo
 }
 
 void append_index(LINDEX *l ,INDEX *i){// Agrega un nodo indice al final de la lista
-
+    if(l==NULL) return;//Caso lista nula
+    if(l->head == NULL){//Caso lista vacía
+        l->tail = l->head = i;
+        return;
+    }
+    //Caso lista con elementos
+    l->tail->next = i;
+    l->tail = i;
+    return;
 }
 
-LINDEX *combinar(LINDEX l1, LINDEX l2){//Retorna una lista ligada de la concatenacion de l1 con l2
-
-
+//Retorna una lista ligada de la concatenacion de l1 con l2
+LINDEX *combinar(LINDEX *l1, LINDEX *l2){
+    l1->tail->next = l2->head;
+    l1->tail = l2->tail;
+    return l1;
 }
 
 void backpatch(CODE *c, LINDEX l, char *label){
-
+    printf("No sabemos :(");
 }

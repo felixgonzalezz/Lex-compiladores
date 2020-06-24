@@ -1,3 +1,6 @@
+#ifndef CUAD_H
+#define CUAD_H
+
 typedef struct cuad CUAD;
 struct cuad {
     char *op;
@@ -20,4 +23,6 @@ CODE *init_code(); // Reserva memoria para el codigo
 
 void *finish_code(CODE *c); //Libera la memoria de la lista ligada del codigo
 
-void *append_cuad(CODE* C, CUAD *cd); //Agrega una cuadrupla al final de la lista
+void append_cuad(CODE* C, CUAD *cd); //Agrega una cuadrupla al final de la lista
+
+#endif
