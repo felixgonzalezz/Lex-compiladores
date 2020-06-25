@@ -2,6 +2,8 @@
 #define TYPETAB_H
 #include "data.h"
 
+char* strdup_t(const char* cad);
+
 void append_type(TYPETAB *tt, TYPE *t); // Agrega al final de la tabla un nuevo tipo
 void clear_type_tab(TYPETAB *tt ); // Deja vacia la tabla
 

@@ -5,7 +5,11 @@
 %{
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "y.tab.h"
+
+extern void yyerror(char *s);
+
 %}
 
 /*Indicar que solo lea un fichero de entrada*/
@@ -85,11 +89,15 @@ cadena \"[^"]*\"
 "verdadero"         { return VERDADERO; }
 "falso"             { return FALSO; }
 {num}               { return NUM; }
-{flotante}			{ return NUM; }
-{doble}				{ return NUM; }
-{caracter}			{ return CARACTER; }
-{cadena}			{ return CADENA; }
-{id}                { return ID; } /*En caso de encontrar algo del identificador*/ 
+{flotante}			    { return NUM; }
+{doble}			      	{ return NUM; }
+{caracter}			    { return CARACTER; }
+{cadena}			      { return CADENA; }
+{id}                { 
+                      strcpy(yylval.id, yytext); 
+                      return ID;
+                    } /*En caso de encontrar el identificador*/ 
 [ \t\n\r]+          {}			/*Para que espacios en blanco sean ignorados*/
 .                   {  {printf("Error Lexico: %s\n En línea %d", yytext, yylineno);} } /*Para los simbolos no reconocidos error lexico*/
 %%
+

@@ -17,7 +17,26 @@ extern int yylineno;
 extern char* yytext;
 extern int yylex();
 void yyerror(char *s);
+
+SSTACK *p_simbolos = init_sym_tab_stack();
+TSTACK *p_tipos = init_type_tab_stack();
+
+TYPETAB *t_tipos = init_type_tab();
+SYMTAB *t_simbolos = init_sym_tab();
+
+int typeGBL;
+int dir;
+
 %}
+
+%union{
+        struct{
+                int tipo;
+                char dir[32];
+        }num;
+        char id[32];
+        int tipo;
+}
 
 /* Modif. Simon R. 26/05/2020 crear token para los no terminales y 
    reordenamiento de tokens por precedencia
@@ -83,10 +102,29 @@ void yyerror(char *s);
 
 /*Sección del esquema de traducción, usa BNF simplificada*/
 %%
-programa : declaraciones funciones ;
+programa : declaraciones funciones 
+        {
+        push_st(p_simbolos, t_simbolos);
+        push_tt(p_tipos, t_tipos);
 
-declaraciones : tipo lista_var PYC declaraciones {printf("D-> T L ; D\n");}
-        | tipo_registro lista_var PYC declaraciones | {printf("D->€\n");};
+        dir = 0;
+
+        /*$1.code = $3.code;*/
+
+        };
+
+declaraciones : 
+        tipo lista_var PYC declaraciones 
+        {
+        printf("tipo normal");
+        /*typeGBL = $1*/
+        }
+        | tipo_registro lista_var PYC declaraciones 
+        {
+        printf("tipo_registro");
+
+        }
+        | {};
 
 tipo_registro : ESTRUCTURA INICIO  declaraciones FIN ;
 

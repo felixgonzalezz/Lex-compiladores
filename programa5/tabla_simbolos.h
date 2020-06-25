@@ -10,6 +10,7 @@ SYMTAB *clear_sym_tab (SYMTAB *t ) ; // Deja vacia la tabla
 
 SYM *finish_all_syms(SYM *n);
 SYM *finish_all_symtabs(SYMTAB *n);
+char* strdup_s(const char* cad);
 
 SYMTAB *pop_st ( SSTACK *s ) ; // Ejecuta un pop sobre la pila de tablas de simbolos
 void push_st ( SSTACK *s , SYMTAB *st) ; // Ingresa una tabla a la pila de tablas de simbolos
@@ -30,10 +31,10 @@ void print_sym_tab(SYMTAB *t ) ; // Imprime en pantalla l a tabla de simbolos
 void print_arg_tab(ARGS *A);
 void print_arg(ARG *s);
 
-int getDir (SYMTAB *T , char *id ) ;
-int getTipo (SYMTAB *T , char *id ) ;
-int getVar (SYMTAB *T , char *id ) ;
-ARGS* getArgs(SYMTAB *T , char *id ) ;
-int getNumArgs (SYMTAB *T , char *id ) ;
+int getDir (SYMTAB *T , char *id);
+int getTipo (SYMTAB *T , char *id);
+int getVar (SYMTAB *T , char *id);
+ARGS* getArgs(SYMTAB *T , char *id);
+int getNumArgs (SYMTAB *T , char *id);
 
 # endif
